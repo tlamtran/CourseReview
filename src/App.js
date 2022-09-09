@@ -1,6 +1,10 @@
+// Main app
+
+import Title from './components/Title'
+
 const App = () => {
     return(
-        <h1>Course Reviews</h1>
+        <Title text='Course reviews' />
     )
 }
 
