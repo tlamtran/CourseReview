@@ -1,4 +1,4 @@
-// reviews from/to backend
+// courses from backend
 
 import axios from 'axios'
 const baseUrl = 'backend url'
@@ -8,6 +8,6 @@ const getAll = async () => {
     return response.data
 }
 
-const reviewServices = { getAll }
+const courseServices = { getAll }
 
-export default reviewServices
+export default courseServices
