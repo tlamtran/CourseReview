@@ -7,6 +7,7 @@ import StarReview from './components/StarReview'
 //import courseServices from './services/courses'
 import { useEffect, useState } from 'react'
 import './App.css'
+import courseServices from './services/courses'
 
 
 const App = () => {
@@ -14,17 +15,14 @@ const App = () => {
     const [courses, setCourses] = useState([])
 
     useEffect(() => {
-        setCourses(Array(
-            {
-                code: 'CS-0000',
-                name: 'Programming 0'
-            },
-            {
-                code: 'CS-1234',
-                name: 'Programming 1'
-            }
-        ))
+        fetchInitialData()
     }, [])
+
+    const fetchInitialData = async () => {
+        const response = await courseServices.getCS()
+        console.log(response)
+        setCourses(response)
+    }
 
     return(
         <div className='container'>
@@ -36,7 +34,7 @@ const App = () => {
                 {courses.map(course =>
                     <Course
                         code={course.code}
-                        name={course.name}
+                        name={course.name.en}
                         key={course.code}
                     />)
                 }
