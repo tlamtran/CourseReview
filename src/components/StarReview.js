@@ -21,24 +21,22 @@ const StarReview = ({ size, space }) => {
     }
 
     return (
-        <div>
-            {stars.map( value => {
-                return (
-                    <FaStar
-                        key={value}
-                        size={size} // size of the star
-                        style={{
-                            marginRight: space, // space between the stars
-                            cursor: 'pointer'
-                        }}
-                        color={(clickStars || hoverStars) >= value ? '#FFBA5A' : '#a9a9a9'}
-                        onClick={() => handleClick(value)}
-                        onMouseOver={() => handleHover(value)}
-                        onMouseLeave={handleUnhover}
-                    />
-                )
-            })}
-        </div>
+        stars.map( value => {
+            return (
+                <FaStar
+                    key={value}
+                    size={size} // size of the star
+                    style={{
+                        marginRight: space, // space between the stars
+                        cursor: 'pointer'
+                    }}
+                    color={(clickStars || hoverStars) >= value ? '#FFBA5A' : '#a9a9a9'}
+                    onClick={() => handleClick(value)}
+                    onMouseOver={() => handleHover(value)}
+                    onMouseLeave={handleUnhover}
+                />
+            )
+        })
     )
 }
 

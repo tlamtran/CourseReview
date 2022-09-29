@@ -1,11 +1,12 @@
 // Main app
 
-import Title from './components/Title'
+import Header from './components/Header'
+import Footer from './components/Footer'
 import Course from './components/Course'
 import StarReview from './components/StarReview'
-
 //import courseServices from './services/courses'
 import { useEffect, useState } from 'react'
+import './App.css'
 
 
 const App = () => {
@@ -25,18 +26,22 @@ const App = () => {
         ))
     }, [])
 
-    console.log(courses)
     return(
-        <div>
-            <Title text='Course reviews' />
-            <StarReview size={20} space={5} />
-            {courses.map(course =>
-                <Course
-                    code={course.code}
-                    name={course.name}
-                    key={course.code}
-                />)
-            }
+        <div className='container'>
+            <Header text='Course reviews' />
+            <div className='reviews'>
+                <StarReview size={20} space={5} />
+            </div>
+            <div className='courses'>
+                {courses.map(course =>
+                    <Course
+                        code={course.code}
+                        name={course.name}
+                        key={course.code}
+                    />)
+                }
+            </div>
+            <Footer />
         </div>
     )
 }
