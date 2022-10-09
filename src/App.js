@@ -1,13 +1,17 @@
-// Main app
+import { Client as Styletron } from 'styletron-engine-atomic'
+import { Provider as StyletronProvider } from 'styletron-react'
+import { LightTheme, BaseProvider } from 'baseui'
+
+const engine = new Styletron()
+//-------------------------------------------- Base Web UI setup above
 
 import Header from './components/Header'
 import Footer from './components/Footer'
-import Course from './components/Course'
+import CourseList from './components/CourseList'
 import StarReview from './components/StarReview'
-//import courseServices from './services/courses'
+import courseServices from './services/courses'
 import { useEffect, useState } from 'react'
 import './App.css'
-import courseServices from './services/courses'
 
 
 const App = () => {
@@ -19,28 +23,26 @@ const App = () => {
     }, [])
 
     const fetchInitialData = async () => {
-        const response = await courseServices.getCS()
+        const response = await courseServices.getCourses()
         console.log(response)
         setCourses(response)
     }
 
-    return(
-        <div className='container'>
-            <Header text='Course reviews' />
-            <div className='reviews'>
-                <StarReview size={20} space={5} />
-            </div>
-            <div className='courses'>
-                {courses.map(course =>
-                    <Course
-                        code={course.code}
-                        name={course.name.en}
-                        key={course.code}
-                    />)
-                }
-            </div>
-            <Footer />
-        </div>
+    return (
+        <StyletronProvider value={engine}>
+            <BaseProvider theme={LightTheme}>
+                <div className='container'>
+                    <Header text='Course reviews' />
+                    <div className='reviews'>
+                        <StarReview size={20} space={5} />
+                    </div>
+                    <div className='courses'>
+                        <CourseList courses={courses}/>
+                    </div>
+                    <Footer />
+                </div>
+            </BaseProvider>
+        </StyletronProvider>
     )
 }
 
