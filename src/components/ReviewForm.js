@@ -10,15 +10,11 @@ const ReviewForm = ({ handleAdd }) => {
 
     const addReview = (event) => {
         event.preventDefault()
-        console.log(text)
-        console.log(difficulty)
-        console.log(workLoad)
-        console.log(teaching)
+        handleAdd(text, difficulty, workLoad, teaching)
         setText('')
         setDifficulty(0)
         setWorkload(0)
         setTeaching(0)
-        handleAdd()
     }
 
     return (

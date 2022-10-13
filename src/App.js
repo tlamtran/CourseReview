@@ -10,6 +10,7 @@ import Footer from './components/Footer'
 import CourseList from './components/CourseList'
 import Toggleable from './components/Toggleable'
 import Reviews from './components/Reviews'
+import ReviewsStats from './components/ReviewsStats'
 import ReviewForm from './components/ReviewForm'
 import courseServices from './services/courses'
 import reviewServices from './services/review'
@@ -38,7 +39,17 @@ const App = () => {
         setReviews(response)
     }
 
-    const handleAdd = () => {
+    const handleAdd = ( text, difficulty, workLoad, teaching ) => {
+        const newReview = {
+            text: text,
+            difficulty: difficulty,
+            workLoad: workLoad,
+            teaching: teaching,
+            likes: 0,
+            dislikes: 0,
+            id: Math.floor(Math.random() * 1000)
+        }
+        setReviews(reviews.concat(newReview))
         reviewFormRef.current.toggleVisibility()
     }
 
@@ -53,6 +64,7 @@ const App = () => {
         else {
             return (
                 <div className='reviews'>
+                    <ReviewsStats reviews={reviews} />
                     <Toggleable
                         buttonLabel='Write a review'
                         ref={reviewFormRef}>
