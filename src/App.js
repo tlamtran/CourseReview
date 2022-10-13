@@ -21,7 +21,7 @@ import './App.css'
 const App = () => {
 
     const [courses, setCourses] = useState([])
-    const [reviews, setReviews] = useState([])
+    const [course, setCourse] = useState(null)
 
     const reviewFormRef = useRef()
 
@@ -36,7 +36,7 @@ const App = () => {
 
     const fetchReview = async (code) => {
         const response = await reviewServices.getReview(code)
-        setReviews(response)
+        setCourse(response)
     }
 
     const handleAdd = ( text, difficulty, workLoad, teaching ) => {
@@ -49,12 +49,12 @@ const App = () => {
             dislikes: 0,
             id: Math.floor(Math.random() * 1000)
         }
-        setReviews(reviews.concat(newReview))
+        setCourse(course.reviews.concat(newReview))
         reviewFormRef.current.toggleVisibility()
     }
 
     const ReviewDiv = () => {
-        if (reviews.length === 0) {
+        if (course === null) {
             return (
                 <div className='reviews'>
                     <p>select a course from the list</p>
@@ -64,13 +64,14 @@ const App = () => {
         else {
             return (
                 <div className='reviews'>
-                    <ReviewsStats reviews={reviews} />
+                    <h1>{course.code}</h1>
+                    <ReviewsStats course={course} />
                     <Toggleable
                         buttonLabel='Write a review'
                         ref={reviewFormRef}>
                         <ReviewForm handleAdd={handleAdd}/>
                     </Toggleable>
-                    <Reviews reviews={reviews} />
+                    <Reviews course={course} />
                 </div>
             )
         }

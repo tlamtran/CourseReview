@@ -58,7 +58,7 @@ const reviews = [
 const getReview = async (code) => {
     const foundReview = await reviews.find(review => review.code === code)
     if (foundReview) {
-        return foundReview.reviews
+        return foundReview
     }
     else {
         return []

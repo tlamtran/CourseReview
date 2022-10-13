@@ -66,6 +66,10 @@ body {
     max-width: 50vw;
 }
 
+.review {
+    padding: 20px;
+}
+
 .footer {
     font-size: 15px;
     grid-column-start: 1;

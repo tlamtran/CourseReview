@@ -23,8 +23,6 @@ const ReviewForm = ({ handleAdd }) => {
                 <div>
                     difficulty {difficulty}
                     <StarReview
-                        size={17}
-                        space={1}
                         starValue={difficulty}
                         setStarValue={setDifficulty}
                     />
@@ -32,8 +30,6 @@ const ReviewForm = ({ handleAdd }) => {
                 <div>
                     workload {workLoad}
                     <StarReview
-                        size={17}
-                        space={1}
                         starValue={workLoad}
                         setStarValue={setWorkload}
                     />
@@ -41,8 +37,6 @@ const ReviewForm = ({ handleAdd }) => {
                 <div>
                     teaching {teaching}
                     <StarReview
-                        size={17}
-                        space={1}
                         starValue={teaching}
                         setStarValue={setTeaching}
                     />

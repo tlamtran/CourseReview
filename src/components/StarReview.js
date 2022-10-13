@@ -2,12 +2,12 @@ import { FaStar } from 'react-icons/fa'
 import { useState } from 'react'
 
 
-const StarReview = ({ size, space, starValue, setStarValue }) => {
+const StarReview = ({ starValue, setStarValue }) => {
     const stars = Array(1,2,3,4,5)
     const [hoverStars, setHoverStars] = useState(0)
 
     const handleClick = value => {
-        setStarValue(value)
+        if (setStarValue) setStarValue(value)
     }
 
     const handleHover = value => {
@@ -23,9 +23,9 @@ const StarReview = ({ size, space, starValue, setStarValue }) => {
             return (
                 <FaStar
                     key={value}
-                    size={size} // size of the star
+                    size={17}
                     style={{
-                        marginRight: space, // space between the stars
+                        marginRight: 1,
                         cursor: 'pointer'
                     }}
                     color={(starValue || hoverStars) >= value ? '#FFBA5A' : '#a9a9a9'}
