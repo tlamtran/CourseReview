@@ -29,15 +29,18 @@ const App = () => {
     }
 
     return (
-        <StyletronProvider value={engine}>
+        <StyletronProvider value={engine} >
             <BaseProvider theme={LightTheme}>
                 <div className='container'>
                     <Header text='Course reviews' />
-                    <div className='reviews'>
-                        <StarReview size={20} space={5} />
+                    <div className='filters'>
+                        <h1>filters</h1>
                     </div>
                     <div className='courses'>
                         <CourseList courses={courses}/>
+                    </div>
+                    <div className='reviews'>
+                        <StarReview size={20} space={5} />
                     </div>
                     <Footer />
                 </div>

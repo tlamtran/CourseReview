@@ -24,9 +24,15 @@ const CourseList = ({ courses }) => {
             overrides={{
                 List: {
                     style: {
-                        height: '415px',
-                        width: '790px',
                         boxShadow: '0px 0px 0px',
+                        gridColumnStart: 1,
+                        gridColumnEnd: 2,
+                        gridRowStart: 3,
+                        gridRowEnd: 4,
+                        maxHeight: '40vh',
+                        padding: '0px',
+                        borderRadius: '0px',
+                        paddingLeft: '10px'
                     }
                 },
                 Option: {
