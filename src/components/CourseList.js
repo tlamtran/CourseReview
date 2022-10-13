@@ -15,12 +15,11 @@ const Course = React.forwardRef((props, ref) => (
     </MenuAdapter>
 ))
 
-const CourseList = ({ courses }) => {
+const CourseList = ({ courses, fetch }) => {
     return (
         <StatefulMenu
             items={courses}
-            onItemSelect={item =>
-                console.log(`${item.item.code} ${item.item.name.en}`)}
+            onItemSelect={item => fetch(item.item.code)}
             overrides={{
                 List: {
                     style: {
