@@ -16,35 +16,38 @@ const Course = React.forwardRef((props, ref) => (
 ))
 
 const CourseList = ({ courses, fetch }) => {
+
     return (
-        <StatefulMenu
-            items={courses}
-            onItemSelect={item => fetch(item.item.code)}
-            overrides={{
-                List: {
-                    style: {
-                        boxShadow: '0px 0px 0px',
-                        gridColumnStart: 1,
-                        gridColumnEnd: 2,
-                        gridRowStart: 3,
-                        gridRowEnd: 4,
-                        maxHeight: '40vh',
-                        padding: '0px',
-                        borderRadius: '0px',
-                        paddingLeft: '10px'
-                    }
-                },
-                Option: {
-                    props: {
-                        overrides: {
-                            ListItem: {
-                                component: Course
+        <div className="courses">
+            <StatefulMenu
+                items={courses}
+                onItemSelect={item => fetch(item.item.code)}
+                overrides={{
+                    List: {
+                        style: {
+                            boxShadow: '0px 0px 0px',
+                            gridColumnStart: 1,
+                            gridColumnEnd: 2,
+                            gridRowStart: 3,
+                            gridRowEnd: 4,
+                            maxHeight: '40vh',
+                            padding: '0px',
+                            borderRadius: '0px',
+                            paddingLeft: '10px'
+                        }
+                    },
+                    Option: {
+                        props: {
+                            overrides: {
+                                ListItem: {
+                                    component: Course
+                                }
                             }
                         }
                     }
-                }
-            }}
-        />
+                }}
+                />
+        </div>
     )
 }
 
