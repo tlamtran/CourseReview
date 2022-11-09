@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineDislike } from "react-icons/ai";
+import { useState, useRef } from "react";
 import StarReview from "./StarReview";
 import ReviewsStats from "./ReviewsStats";
 import ReviewForm from "./ReviewForm";
@@ -54,7 +54,9 @@ const Review = ({ review }) => {
   );
 };
 
-const Reviews = ({ course, handleAdd, ref }) => {
+const Reviews = ({ course, handleAdd }) => {
+  const reviewFormRef = useRef();
+
   if (course === null) {
     return <p>select a course from the list</p>;
   } else if (course.reviews.length < 1) {
@@ -63,7 +65,7 @@ const Reviews = ({ course, handleAdd, ref }) => {
         <h1>{course.code}</h1>
         <p>no reviews found</p>
         <ReviewsStats course={course} />
-        <Toggleable buttonLabel="Write a review" ref={ref}>
+        <Toggleable buttonLabel="Write a review" ref={reviewFormRef}>
           <ReviewForm handleAdd={handleAdd} />
         </Toggleable>
       </div>
@@ -73,8 +75,8 @@ const Reviews = ({ course, handleAdd, ref }) => {
       <div className="reviews">
         <h1>{course.code}</h1>
         <ReviewsStats course={course} />
-        <Toggleable buttonLabel="Write a review" ref={ref}>
-          <ReviewForm handleAdd={handleAdd} />
+        <Toggleable buttonLabel="Write a review" ref={reviewFormRef}>
+          <ReviewForm handleAdd={handleAdd} toggle={reviewFormRef} />
         </Toggleable>
         <div>
           {course.reviews.map((review) => (

@@ -1,5 +1,4 @@
 const ReviewsStats = ({ course }) => {
-  console.log(course);
   const score =
     course.reviews
       .map((r) => r.difficulty + r.teaching + r.workload)
