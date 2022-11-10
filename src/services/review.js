@@ -1,7 +1,7 @@
 //import axios from 'axios'
 //const baseUrl = 'backend url'
 
-const reviews = [
+const courses = [
   {
     code: "CS-C3240",
     reviews: [
@@ -56,11 +56,14 @@ const reviews = [
 ];
 
 const getReview = async (code) => {
-  const foundReview = await reviews.find((review) => review.code === code);
+  const foundReview = await courses.find((c) => c.code === code);
   if (foundReview) {
     return foundReview;
   } else {
-    return null;
+    return {
+      code: code,
+      reviews: []
+    }
   }
 };
 

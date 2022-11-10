@@ -21,7 +21,7 @@ const CourseList = ({ courses, fetch }) => {
         <div className="courses">
             <StatefulMenu
                 items={courses}
-                onItemSelect={item => fetch(item.item.code)}
+                onItemSelect={item => fetch(item.item.code)} // Route Link??
                 overrides={{
                     List: {
                         style: {

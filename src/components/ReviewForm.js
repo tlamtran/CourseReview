@@ -2,7 +2,7 @@ import StarReview from "./StarReview";
 import TextArea from "./TextArea";
 import { useState } from "react";
 
-const ReviewForm = ({ handleAdd }) => {
+const ReviewForm = ({ handleAdd, toggle }) => {
   const [text, setText] = useState("");
   const [difficulty, setDifficulty] = useState(0);
   const [workLoad, setWorkload] = useState(0);
@@ -15,6 +15,7 @@ const ReviewForm = ({ handleAdd }) => {
     setDifficulty(0);
     setWorkload(0);
     setTeaching(0);
+    toggle.current.toggleVisibility()
   };
 
   return (

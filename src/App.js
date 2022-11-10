@@ -8,10 +8,10 @@ const engine = new Styletron();
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import CourseList from "./components/CourseList";
-import Reviews from "./components/Review";
+import Reviews from "./components/Reviews";
 import courseServices from "./services/courses";
 import reviewServices from "./services/review";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Filters from "./components/Filters";
 
@@ -19,14 +19,14 @@ const App = () => {
   const [courses, setCourses] = useState([]);
   const [course, setCourse] = useState(null);
 
-  const reviewFormRef = useRef();
 
   useEffect(() => {
     courseServices.getCourses().then((response) => setCourses(response));
   }, []);
 
-  const fetchReview = async (code) => {
+  const fetchCourseReview = async (code) => {
     const response = await reviewServices.getReview(code);
+    console.log(response)
     setCourse(response);
   };
 
@@ -34,14 +34,13 @@ const App = () => {
     const newReview = {
       text: text,
       difficulty: Math.max(difficulty, 1),
-      workLoad: Math.max(workLoad, 1),
+      workload: Math.max(workLoad, 1),
       teaching: Math.max(teaching, 1),
       likes: 0,
       dislikes: 0,
       id: Math.floor(Math.random() * 1000),
     };
     setCourse({ ...course, reviews: course.reviews.concat(newReview) });
-    reviewFormRef.current.toggleVisibility();
   };
 
   return (
@@ -50,8 +49,8 @@ const App = () => {
         <div className="container">
           <Header text="Course reviews" />
           <Filters className="filters" />
-          <CourseList courses={courses} fetch={fetchReview} />
-          <Reviews course={course} handleAdd={handleAddReview} ref={reviewFormRef} />
+          <CourseList courses={courses} fetch={fetchCourseReview} />
+          <Reviews course={course} handleAdd={handleAddReview} />
           <Footer />
         </div>
       </BaseProvider>
