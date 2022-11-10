@@ -20,6 +20,7 @@ const StarReview = ({ starValue, setStarValue }) => {
   return stars.map((value) => {
     return (
       <FaStar
+        className={`star${value}`}
         key={value}
         size={17}
         style={{
