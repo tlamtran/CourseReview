@@ -14,10 +14,25 @@ const Review = ({ review }) => {
   const [dislikes, setDislikes] = useState(review.dislikes);
   const [clicked, setClicked] = useState(false);
 
-  const handleLike = () => {
+  const handleLike = async () => {
     if (!clicked) {
       setLikes(likes + 1);
       setClicked(true);
+      
+      try {
+      const response = await fetch(`http://localhost:3001/reviews/${review.id}`, {
+        method: "PUT",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({
+              likes: likes,
+              dislikes: dislikes,
+        })
+      });
+
+      console.log(response);
+    } catch (err) {
+      console.error(err.message);
+    }
     }
   };
 

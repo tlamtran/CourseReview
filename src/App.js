@@ -32,13 +32,13 @@ const App = () => {
 
   const handleAddReview = (text, difficulty, workLoad, teaching) => {
     const newReview = {
+      // id: Math.floor(Math.random() * 1000),
       text: text,
-      difficulty: Math.max(difficulty, 1),
-      workload: Math.max(workLoad, 1),
-      teaching: Math.max(teaching, 1),
       likes: 0,
       dislikes: 0,
-      id: Math.floor(Math.random() * 1000),
+      difficulty: Math.max(difficulty, 1),
+      workload: Math.max(workLoad, 1),
+      teaching: Math.max(teaching, 1)
     };
     setCourse({ ...course, reviews: course.reviews.concat(newReview) });
   };

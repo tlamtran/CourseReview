@@ -39,9 +39,9 @@ client.connect(function(err) {
 app.post('/reviews', async (req, res) => {
     try {
 
-        const { review } = req.body;
+        const { review, difficulty, workload, teaching } = req.body;
         await client.query(
-          'INSERT INTO reviews (review) VALUES($1)', [review], (err, result) => {
+          'INSERT INTO reviews (review, difficulty, workload, teaching) VALUES($1,$2,$3,$4)', [review, difficulty,workload, teaching], (err, result) => {
 
         if (!err) {
           res.json("Review was added");
@@ -87,7 +87,7 @@ app.get('/reviews', async (req, res) => {
 app.get('/reviews/:id', async (req, res) => {
   try {
     const {id} = req.params;
-    await client.query('SELECT * FROM reviews WHERE reviewer_id = $1', [id], (err, result) => {
+    await client.query('SELECT * FROM reviews WHERE id = $1', [id], (err, result) => {
 
     if (!err) {
       res.json(result.rows[0]);
@@ -124,8 +124,10 @@ app.get('/courses', async (request, response) => {
 app.put("/reviews/:id", async (req, res) => {
   try {
     const {id} = req.params;
-    const {review} = req.body;
-    await client.query("UPDATE reviews SET review=$1 WHERE reviewer_id=$2", [review, id], (err, response) => {
+    const {likes} = req.body;
+    const {dislikes} = req.body;
+    console.log(id)
+    await client.query("UPDATE reviews SET likes=$1, dislikes=$2 WHERE id=$3", [likes, dislikes, id], (err, response) => {
       
       if (!err) {
         res.json("Review was updated");
