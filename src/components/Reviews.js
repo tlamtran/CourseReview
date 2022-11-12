@@ -24,7 +24,7 @@ const Review = ({ review }) => {
         method: "PUT",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({
-              likes: likes,
+              likes: likes+1,
               dislikes: dislikes,
         })
       });
@@ -49,7 +49,7 @@ const Review = ({ review }) => {
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({
               likes: likes,
-              dislikes: dislikes,
+              dislikes: dislikes+1,
         })
       });
 
