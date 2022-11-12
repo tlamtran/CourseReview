@@ -14,56 +14,55 @@ const Review = ({ review }) => {
   const [dislikes, setDislikes] = useState(review.dislikes);
   const [clicked, setClicked] = useState(false);
 
-  const handleLike = async () => {
+  const handleLike = async () => { // refactor later
     if (!clicked) {
       setLikes(likes + 1);
       setClicked(true);
 
       try {
-      const response = await fetch(`http://localhost:3001/reviews/${review.id}`, {
-        method: "PUT",
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify({
-              likes: likes+1,
-              dislikes: dislikes,
-        })
-      });
+        const response = await fetch(`http://localhost:3001/reviews/${review.id}`, {
+          method: "PUT",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify({
+            likes: likes + 1,
+            dislikes: dislikes,
+          })
+        });
 
-      console.log(response);
-    } catch (err) {
-      console.error(err.message);
-    }
+        console.log(response);
+      } catch (err) {
+        console.error(err.message);
+      }
     }
   };
 
 
-
-  const handleDislike = async () => {
+  const handleDislike = async () => { // refactor later
     if (!clicked) {
       setDislikes(dislikes + 1);
       setClicked(true);
 
       try {
-      const response = await fetch(`http://localhost:3001/reviews/${review.id}`, {
-        method: "PUT",
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify({
-              likes: likes,
-              dislikes: dislikes+1,
-        })
-      });
+        const response = await fetch(`http://localhost:3001/reviews/${review.id}`, {
+          method: "PUT",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify({
+            likes: likes,
+            dislikes: dislikes + 1,
+          })
+        });
 
-      console.log(response);
-    } catch (err) {
-      console.error(err.message);
-    }
+        console.log(response);
+      } catch (err) {
+        console.error(err.message);
+      }
     }
   };
 
   return (
     <div className="review">
       <div>
-        <p>{review.text}</p>
+        <p>{review.review}</p>
         <div>
           difficulty <StarReview starValue={review.difficulty} />
         </div>
@@ -86,32 +85,32 @@ const Review = ({ review }) => {
   );
 };
 
-const Reviews = ({ course, handleAdd, review_id }) => {
+const Reviews = ({ code, reviews, handleAdd, review_id }) => {
   const reviewFormRef = useRef();
 
-  if (course === null) {
+  if (reviews === null) {
     return <p>select a course from the list</p>;
-  } else if (course.reviews.length < 1) {
+  } else if (reviews.length < 1) {
     return (
       <div>
-        <h1>{course.code}</h1>
+        <h1>{code}</h1>
         <p>no reviews found</p>
-        <ReviewsStats course={course} />
+        <ReviewsStats reviews={reviews} />
         <Toggleable buttonLabel="Write a review" ref={reviewFormRef}>
-          <ReviewForm handleAdd={handleAdd} toggle={reviewFormRef} course={course} review_id={review_id} />
+          <ReviewForm handleAdd={handleAdd} toggle={reviewFormRef} code={code} review_id={review_id} />
         </Toggleable>
       </div>
     );
   } else
     return (
       <div className="reviews">
-        <h1>{course.code}</h1>
-        <ReviewsStats course={course} />
+        <h1>{code}</h1>
+        <ReviewsStats reviews={reviews} />
         <Toggleable buttonLabel="Write a review" ref={reviewFormRef}>
-          <ReviewForm handleAdd={handleAdd} course={course} toggle={reviewFormRef} review_id={review_id}/>
+          <ReviewForm handleAdd={handleAdd} code={code} toggle={reviewFormRef} review_id={review_id} />
         </Toggleable>
         <div>
-          {course.reviews.map((review) => (
+          {reviews.map((review) => (
             <Review review={review} key={review.id} />
           ))}
         </div>

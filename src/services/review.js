@@ -1,5 +1,5 @@
-//import axios from 'axios'
-//const baseUrl = 'backend url'
+import axios from 'axios'
+const baseUrl = 'http://localhost:3001/reviews'
 
 const courses = [
   {
@@ -56,17 +56,15 @@ const courses = [
 ];
 
 const getReview = async (code) => {
-  const foundReview = await courses.find((c) => c.code === code);
-  if (foundReview) {
-    return foundReview;
-  } else {
-    return {
-      code: code,
-      reviews: []
-    }
-  }
+  const response = await axios.get(`${baseUrl}/${code}`)
+  return response.data
 };
 
-const reviewServices = { getReview };
+const create = async newReview => {
+  const response = await axios.post(baseUrl, newReview)
+  return response.data
+}
+
+const reviewServices = { getReview, create };
 
 export default reviewServices;

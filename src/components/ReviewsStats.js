@@ -1,9 +1,9 @@
-const ReviewsStats = ({ course }) => {
+const ReviewsStats = ({ reviews }) => {
   const score =
-    course.reviews
+    reviews
       .map((r) => r.difficulty + r.teaching + r.workload)
       .reduce((x, y) => x + y, 0) /
-    (3 * course.reviews.length);
+    (3 * reviews.length);
 
   return <h1>{Math.round(score * 10) / 10}/5</h1>;
 };

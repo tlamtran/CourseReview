@@ -2,37 +2,25 @@ import StarReview from "./StarReview";
 import TextArea from "./TextArea";
 import { useState } from "react";
 
-const ReviewForm = ({ handleAdd, course, toggle, review_id }) => {
+const ReviewForm = ({ handleAdd, code, toggle }) => {
   const [text, setText] = useState("");
   const [difficulty, setDifficulty] = useState(0);
   const [workLoad, setWorkload] = useState(0);
   const [teaching, setTeaching] = useState(0);
-  
+
 
   const addReview = async (event) => {
     event.preventDefault();
-    handleAdd(text, difficulty, workLoad, teaching);
-
-    try {
-      const response = await fetch("http://localhost:3001/reviews", {
-        method: "POST",
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify({
-                id: review_id,
-                review: text,
-                course_id: course.code,
-                likes: 0,
-                dislikes: 0,
-                difficulty: Math.max(difficulty, 1),
-                workload: Math.max(workLoad, 1),
-                teaching: Math.max(difficulty, 1)
-        })
-      });
-
-      console.log(response);
-    } catch (err) {
-      console.error(err.message);
-    }
+    const newReview = {
+      likes: 0,
+      dislikes: 0,
+      course_id: code,
+      review: text,
+      difficulty: Math.max(difficulty, 1),
+      workload: Math.max(workLoad, 1),
+      teaching: Math.max(teaching, 1)
+    };
+    handleAdd(newReview);
 
     setText("");
     setDifficulty(0);

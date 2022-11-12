@@ -17,31 +17,24 @@ import Filters from "./components/Filters";
 
 const App = () => {
   const [courses, setCourses] = useState([]);
-  const [course, setCourse] = useState(null);
-  const review_id = Math.floor(Math.random() * 1000)
+  const [code, setCode] = useState(null)
+  const [reviews, setReviews] = useState(null);
 
 
   useEffect(() => {
     courseServices.getCourses().then((response) => setCourses(response));
   }, []);
 
-  const fetchCourseReview = async (code) => {
+  const fetchCourseReviews = async (code) => {
     const response = await reviewServices.getReview(code);
     console.log(response)
-    setCourse(response);
+    setReviews(response);
+    setCode(code)
   };
 
-  const handleAddReview = (text, difficulty, workLoad, teaching) => {
-    const newReview = {
-      id: review_id,
-      text: text,
-      likes: 0,
-      dislikes: 0,
-      difficulty: Math.max(difficulty, 1),
-      workload: Math.max(workLoad, 1),
-      teaching: Math.max(teaching, 1)
-    };
-    setCourse({ ...course, reviews: course.reviews.concat(newReview) });
+  const handleAddReview = async (newReview) => {
+    await reviewServices.create(newReview)
+    setReviews(reviews.concat(newReview)); // fix later - should concat with response instead of newReview
   };
 
   return (
@@ -50,8 +43,8 @@ const App = () => {
         <div className="container">
           <Header text="Course reviews" />
           <Filters className="filters" />
-          <CourseList courses={courses} fetch={fetchCourseReview} />
-          <Reviews course={course} handleAdd={handleAddReview} review_id={review_id} />
+          <CourseList courses={courses} fetch={fetchCourseReviews} />
+          <Reviews code={code} reviews={reviews} handleAdd={handleAddReview} />
           <Footer />
         </div>
       </BaseProvider>
