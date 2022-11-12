@@ -32,7 +32,7 @@ const App = () => {
 
   const handleAddReview = (text, difficulty, workLoad, teaching) => {
     const newReview = {
-      // id: Math.floor(Math.random() * 1000),
+      id: Math.floor(Math.random() * 1000),
       text: text,
       likes: 0,
       dislikes: 0,

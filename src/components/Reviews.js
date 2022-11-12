@@ -18,7 +18,7 @@ const Review = ({ review }) => {
     if (!clicked) {
       setLikes(likes + 1);
       setClicked(true);
-      
+
       try {
       const response = await fetch(`http://localhost:3001/reviews/${review.id}`, {
         method: "PUT",
@@ -36,10 +36,27 @@ const Review = ({ review }) => {
     }
   };
 
-  const handleDislike = () => {
+
+
+  const handleDislike = async () => {
     if (!clicked) {
       setDislikes(dislikes + 1);
       setClicked(true);
+
+      try {
+      const response = await fetch(`http://localhost:3001/reviews/${review.id}`, {
+        method: "PUT",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({
+              likes: likes,
+              dislikes: dislikes,
+        })
+      });
+
+      console.log(response);
+    } catch (err) {
+      console.error(err.message);
+    }
     }
   };
 

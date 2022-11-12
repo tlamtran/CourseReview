@@ -29,9 +29,6 @@ client.connect(function(err) {
 
 
 
-
-
-
 //ROUTES//
 
 // POST REVIEWS
@@ -123,10 +120,10 @@ app.get('/courses', async (request, response) => {
 
 app.put("/reviews/:id", async (req, res) => {
   try {
-    const {id} = req.params;
+    const {id} = req.body;
+    console.log(id);
     const {likes} = req.body;
     const {dislikes} = req.body;
-    console.log(id)
     await client.query("UPDATE reviews SET likes=$1, dislikes=$2 WHERE id=$3", [likes, dislikes, id], (err, response) => {
       
       if (!err) {
