@@ -36,9 +36,9 @@ client.connect(function(err) {
 app.post('/reviews', async (req, res) => {
     try {
 
-        const { review, difficulty, workload, teaching } = req.body;
+        const { id, review, course_id, likes, dislikes, difficulty, workload, teaching } = req.body;
         await client.query(
-          'INSERT INTO reviews (review, difficulty, workload, teaching) VALUES($1,$2,$3,$4)', [review, difficulty,workload, teaching], (err, result) => {
+          'INSERT INTO reviews (id, review, course_id, likes, dislikes, difficulty, workload, teaching) VALUES($1,$2,$3,$4,$5,$6,$7,$8)', [id, review, course_id, likes, dislikes, difficulty,workload, teaching], (err, result) => {
 
         if (!err) {
           res.json("Review was added");
@@ -120,7 +120,7 @@ app.get('/courses', async (request, response) => {
 
 app.put("/reviews/:id", async (req, res) => {
   try {
-    const {id} = req.body;
+    const {id} = req.params;
     console.log(id);
     const {likes} = req.body;
     const {dislikes} = req.body;

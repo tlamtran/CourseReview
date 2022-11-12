@@ -86,7 +86,7 @@ const Review = ({ review }) => {
   );
 };
 
-const Reviews = ({ course, handleAdd }) => {
+const Reviews = ({ course, handleAdd, review_id }) => {
   const reviewFormRef = useRef();
 
   if (course === null) {
@@ -98,7 +98,7 @@ const Reviews = ({ course, handleAdd }) => {
         <p>no reviews found</p>
         <ReviewsStats course={course} />
         <Toggleable buttonLabel="Write a review" ref={reviewFormRef}>
-          <ReviewForm handleAdd={handleAdd} />
+          <ReviewForm handleAdd={handleAdd} toggle={reviewFormRef} course={course} review_id={review_id} />
         </Toggleable>
       </div>
     );
@@ -108,7 +108,7 @@ const Reviews = ({ course, handleAdd }) => {
         <h1>{course.code}</h1>
         <ReviewsStats course={course} />
         <Toggleable buttonLabel="Write a review" ref={reviewFormRef}>
-          <ReviewForm handleAdd={handleAdd} toggle={reviewFormRef} />
+          <ReviewForm handleAdd={handleAdd} course={course} toggle={reviewFormRef} review_id={review_id}/>
         </Toggleable>
         <div>
           {course.reviews.map((review) => (

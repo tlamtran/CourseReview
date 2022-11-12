@@ -1,14 +1,14 @@
 CREATE TABLE reviews(
-	review_id INT,
+	id INT,
 	student_id INT,
 	review VARCHAR(255),
 	likes INT,
 	dislikes INT,
-    course_id INT,
+    course_id VARCHAR(255),
 	difficuly INT,
 	workload INT,
 	teaching INT,
-   PRIMARY KEY(review_id)
+   PRIMARY KEY(id)
 );
 
 CREATE TABLE students(

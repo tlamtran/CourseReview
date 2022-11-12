@@ -18,6 +18,7 @@ import Filters from "./components/Filters";
 const App = () => {
   const [courses, setCourses] = useState([]);
   const [course, setCourse] = useState(null);
+  const review_id = Math.floor(Math.random() * 1000)
 
 
   useEffect(() => {
@@ -32,7 +33,7 @@ const App = () => {
 
   const handleAddReview = (text, difficulty, workLoad, teaching) => {
     const newReview = {
-      id: Math.floor(Math.random() * 1000),
+      id: review_id,
       text: text,
       likes: 0,
       dislikes: 0,
@@ -50,7 +51,7 @@ const App = () => {
           <Header text="Course reviews" />
           <Filters className="filters" />
           <CourseList courses={courses} fetch={fetchCourseReview} />
-          <Reviews course={course} handleAdd={handleAddReview} />
+          <Reviews course={course} handleAdd={handleAddReview} review_id={review_id} />
           <Footer />
         </div>
       </BaseProvider>

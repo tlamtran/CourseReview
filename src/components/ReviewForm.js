@@ -2,7 +2,7 @@ import StarReview from "./StarReview";
 import TextArea from "./TextArea";
 import { useState } from "react";
 
-const ReviewForm = ({ handleAdd, toggle }) => {
+const ReviewForm = ({ handleAdd, course, toggle, review_id }) => {
   const [text, setText] = useState("");
   const [difficulty, setDifficulty] = useState(0);
   const [workLoad, setWorkload] = useState(0);
@@ -12,13 +12,17 @@ const ReviewForm = ({ handleAdd, toggle }) => {
   const addReview = async (event) => {
     event.preventDefault();
     handleAdd(text, difficulty, workLoad, teaching);
-    
+
     try {
       const response = await fetch("http://localhost:3001/reviews", {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({
+                id: review_id,
                 review: text,
+                course_id: course.code,
+                likes: 0,
+                dislikes: 0,
                 difficulty: Math.max(difficulty, 1),
                 workload: Math.max(workLoad, 1),
                 teaching: Math.max(difficulty, 1)
