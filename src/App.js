@@ -17,9 +17,8 @@ import Filters from "./components/Filters";
 
 const App = () => {
   const [courses, setCourses] = useState([]);
-  const [code, setCode] = useState(null)
+  const [code, setCode] = useState(null);
   const [reviews, setReviews] = useState(null);
-
 
   useEffect(() => {
     courseServices.getCourses().then((response) => setCourses(response));
@@ -27,14 +26,17 @@ const App = () => {
 
   const fetchCourseReviews = async (code) => {
     const response = await reviewServices.getReview(code);
-    console.log(response)
     setReviews(response);
-    setCode(code)
+    setCode(code);
   };
 
-  const handleAddReview = async (newReview) => {
-    await reviewServices.create(newReview)
-    setReviews(reviews.concat(newReview)); // fix later - should concat with response instead of newReview
+  const handleAdd = async (newReview) => {
+    const response = await reviewServices.create(newReview);
+    setReviews(reviews.concat(response));
+  };
+
+  const handleUpdate = async (id, updatedReview) => {
+    await reviewServices.update(id, updatedReview);
   };
 
   return (
@@ -44,7 +46,12 @@ const App = () => {
           <Header text="Course reviews" />
           <Filters className="filters" />
           <CourseList courses={courses} fetch={fetchCourseReviews} />
-          <Reviews code={code} reviews={reviews} handleAdd={handleAddReview} />
+          <Reviews
+            code={code}
+            reviews={reviews}
+            handleAdd={handleAdd}
+            handleUpdate={handleUpdate}
+          />
           <Footer />
         </div>
       </BaseProvider>

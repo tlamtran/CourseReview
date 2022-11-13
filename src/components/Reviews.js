@@ -7,57 +7,37 @@ import ReviewForm from "./ReviewForm";
 import Toggleable from "./Toggleable";
 
 
-
-
-const Review = ({ review }) => {
+const Review = ({ review, handleUpdate }) => {
   const [likes, setLikes] = useState(review.likes);
   const [dislikes, setDislikes] = useState(review.dislikes);
   const [clicked, setClicked] = useState(false);
 
-  const handleLike = async () => { // refactor later
+
+  const handleLike = async () => {
     if (!clicked) {
       setLikes(likes + 1);
       setClicked(true);
-
-      try {
-        const response = await fetch(`http://localhost:3001/reviews/${review.id}`, {
-          method: "PUT",
-          headers: { "Content-type": "application/json" },
-          body: JSON.stringify({
-            likes: likes + 1,
-            dislikes: dislikes,
-          })
-        });
-
-        console.log(response);
-      } catch (err) {
-        console.error(err.message);
-      }
+      handleUpdate(review.id, {
+        likes: likes + 1,
+        dislikes: dislikes
+      })
     }
   };
 
-
-  const handleDislike = async () => { // refactor later
+  const handleDislike = async () => {
     if (!clicked) {
       setDislikes(dislikes + 1);
       setClicked(true);
-
-      try {
-        const response = await fetch(`http://localhost:3001/reviews/${review.id}`, {
-          method: "PUT",
-          headers: { "Content-type": "application/json" },
-          body: JSON.stringify({
-            likes: likes,
-            dislikes: dislikes + 1,
-          })
-        });
-
-        console.log(response);
-      } catch (err) {
-        console.error(err.message);
-      }
+      handleUpdate(review.id, {
+        likes: likes,
+        dislikes: dislikes + 1
+      })
     }
   };
+
+  const handleDelete = async () => { // TO DO
+
+  }
 
   return (
     <div className="review">
@@ -85,7 +65,7 @@ const Review = ({ review }) => {
   );
 };
 
-const Reviews = ({ code, reviews, handleAdd, review_id }) => {
+const Reviews = ({ code, reviews, handleAdd, handleUpdate }) => {
   const reviewFormRef = useRef();
 
   if (reviews === null) {
@@ -97,7 +77,7 @@ const Reviews = ({ code, reviews, handleAdd, review_id }) => {
         <p>no reviews found</p>
         <ReviewsStats reviews={reviews} />
         <Toggleable buttonLabel="Write a review" ref={reviewFormRef}>
-          <ReviewForm handleAdd={handleAdd} toggle={reviewFormRef} code={code} review_id={review_id} />
+          <ReviewForm handleAdd={handleAdd} toggle={reviewFormRef} code={code} />
         </Toggleable>
       </div>
     );
@@ -107,11 +87,11 @@ const Reviews = ({ code, reviews, handleAdd, review_id }) => {
         <h1>{code}</h1>
         <ReviewsStats reviews={reviews} />
         <Toggleable buttonLabel="Write a review" ref={reviewFormRef}>
-          <ReviewForm handleAdd={handleAdd} code={code} toggle={reviewFormRef} review_id={review_id} />
+          <ReviewForm handleAdd={handleAdd} code={code} toggle={reviewFormRef} />
         </Toggleable>
         <div>
-          {reviews.map((review) => (
-            <Review review={review} key={review.id} />
+          {reviews.map((review) => ( // should be sorted according to likes/dislikes
+            <Review review={review} key={review.id} handleUpdate={handleUpdate} />
           ))}
         </div>
       </div>
