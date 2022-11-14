@@ -39,6 +39,10 @@ const App = () => {
     await reviewServices.update(id, updatedReview);
   };
 
+  const handleDelete = async (id) => {
+    setReviews(reviews.filter(review => review.id !== id))
+  }
+
   return (
     <StyletronProvider value={engine}>
       <BaseProvider theme={LightTheme}>
@@ -51,6 +55,7 @@ const App = () => {
             reviews={reviews}
             handleAdd={handleAdd}
             handleUpdate={handleUpdate}
+            handleDelete={handleDelete}
           />
           <Footer />
         </div>

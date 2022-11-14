@@ -95,7 +95,7 @@ app.put("/reviews/:id", (req, res) => {
   );
 });
 
-// DELETE REVIEW -- missing from frontend
+// DELETE REVIEW
 app.delete("/reviews/:id", async (req, res) => {
   try {
     const { id } = req.params;

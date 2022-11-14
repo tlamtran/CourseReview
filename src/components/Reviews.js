@@ -7,7 +7,7 @@ import ReviewForm from "./ReviewForm";
 import Toggleable from "./Toggleable";
 
 
-const Review = ({ review, handleUpdate }) => {
+const Review = ({ review, handleUpdate, handleDelete }) => {
   const [likes, setLikes] = useState(review.likes);
   const [dislikes, setDislikes] = useState(review.dislikes);
   const [clicked, setClicked] = useState(false);
@@ -35,12 +35,13 @@ const Review = ({ review, handleUpdate }) => {
     }
   };
 
-  const handleDelete = async () => { // TO DO
+  const handleDeleteButton = async () => {
     try {
       const deleteReview = await fetch(`http://localhost:3001/reviews/${review.id}`, {
         method: "DELETE"
       });
 
+      handleDelete(review.id);
       
       console.log(deleteReview);
     } catch (err) {
@@ -70,14 +71,14 @@ const Review = ({ review, handleUpdate }) => {
         <AiOutlineDislike />
         {dislikes}
       </button>
-      <button onClick={handleDelete}>
+      <button onClick={handleDeleteButton}>
         Delete
       </button>
     </div>
   );
 };
 
-const Reviews = ({ code, reviews, handleAdd, handleUpdate }) => {
+const Reviews = ({ code, reviews, handleAdd, handleUpdate, handleDelete }) => {
   const reviewFormRef = useRef();
 
   if (reviews === null) {
@@ -103,7 +104,7 @@ const Reviews = ({ code, reviews, handleAdd, handleUpdate }) => {
         </Toggleable>
         <div>
           {reviews.map((review) => ( // should be sorted according to likes/dislikes
-            <Review review={review} key={review.id} handleUpdate={handleUpdate} />
+            <Review review={review} key={review.id} handleUpdate={handleUpdate} handleDelete={handleDelete} />
           ))}
         </div>
       </div>
