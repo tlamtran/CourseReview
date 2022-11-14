@@ -7,11 +7,13 @@ const ReviewForm = ({ handleAdd, code, toggle }) => {
   const [difficulty, setDifficulty] = useState(0);
   const [workLoad, setWorkload] = useState(0);
   const [teaching, setTeaching] = useState(0);
+  const [studentID, setStudentID] = useState();
 
 
   const addReview = async (event) => {
     event.preventDefault();
     const newReview = {
+      student_id: studentID,
       likes: 0,
       dislikes: 0,
       course_id: code,
@@ -26,6 +28,7 @@ const ReviewForm = ({ handleAdd, code, toggle }) => {
     setDifficulty(0);
     setWorkload(0);
     setTeaching(0);
+    setStudentID();
     toggle.current.toggleVisibility()
   };
 
@@ -44,7 +47,8 @@ const ReviewForm = ({ handleAdd, code, toggle }) => {
           teaching {teaching}
           <StarReview starValue={teaching} setStarValue={setTeaching} />
         </div>
-        <TextArea text={text} setText={setText} />
+        <TextArea areaType={"review"} text={text} setText={setText} />
+        <TextArea areaType={"student number"} text={studentID} setText={setStudentID}/>
         <button type="submit">Post</button>
       </div>
     </form>
