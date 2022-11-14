@@ -100,7 +100,7 @@ app.delete("/reviews/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const deleteReview = await client.query(
-      "DELETE FROM reviews WHERE reviewer_id = $1",
+      "DELETE FROM reviews WHERE id = $1",
       [id],
       (err, response) => {
         if (!err) {

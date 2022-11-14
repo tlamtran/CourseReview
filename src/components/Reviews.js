@@ -36,7 +36,16 @@ const Review = ({ review, handleUpdate }) => {
   };
 
   const handleDelete = async () => { // TO DO
+    try {
+      const deleteReview = await fetch(`http://localhost:3001/reviews/${review.id}`, {
+        method: "DELETE"
+      });
 
+      
+      console.log(deleteReview);
+    } catch (err) {
+      console.error(err.message)
+    }
   }
 
   return (
@@ -60,6 +69,9 @@ const Review = ({ review, handleUpdate }) => {
       <button onClick={handleDislike}>
         <AiOutlineDislike />
         {dislikes}
+      </button>
+      <button onClick={handleDelete}>
+        Delete
       </button>
     </div>
   );
