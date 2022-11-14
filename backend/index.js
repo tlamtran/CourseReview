@@ -118,6 +118,23 @@ app.delete("/reviews/:id", async (req, res) => {
 });
 
 
+
+//------STUDENTS TABLE ROUTES-------//
+
+app.get("/students", (req, res) => {
+  client.query("SELECT * FROM students", (err, result) => {
+    if (!err) {
+      const resultRows = result.rows;
+      res.json(resultRows);
+      console.log("Successfully fetched data");
+    } else {
+      console.log(err.message);
+    }
+    client.end;
+  });
+});
+
+
 const PORT = 3001;
 app.listen(PORT, () => {
   console.log(`server has started on port ${PORT}`);

@@ -52,6 +52,7 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
   return (
     <div className="review">
       <div>
+        <p style={{ "fontSize": "0.75em" }}>{review.student_id}</p>
         <p>{review.review}</p>
         <div>
           difficulty <StarReview starValue={review.difficulty} />
