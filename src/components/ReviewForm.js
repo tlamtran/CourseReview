@@ -48,8 +48,15 @@ const ReviewForm = ({ handleAdd, code, toggle }) => {
           <StarReview starValue={teaching} setStarValue={setTeaching} />
         </div>
         <TextArea areaType={"review"} text={text} setText={setText} />
-        <TextArea areaType={"student number"} text={studentID} setText={setStudentID}/>
-        <button type="submit">Post</button>
+        <input
+          placeholder="Optional student number"
+          value={studentID}
+          type="number"
+          onChange={({ target }) => setStudentID(target.value)}
+        />
+        <div>
+          <button type="submit">Post</button>
+        </div>
       </div>
     </form>
   );
