@@ -48,7 +48,7 @@ const App = () => {
       <BaseProvider theme={LightTheme}>
         <div className="container">
           <Header text="Course reviews" />
-          <Filters className="filters" />
+          <Filters setCourses={setCourses} />
           <CourseList courses={courses} fetch={fetchCourseReviews} />
           <Reviews
             code={code}
