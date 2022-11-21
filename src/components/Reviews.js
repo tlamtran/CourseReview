@@ -10,7 +10,7 @@ import Toggleable from "./Toggleable";
 const Review = ({ review, handleUpdate, handleDelete }) => {
   const [likes, setLikes] = useState(review.likes);
   const [dislikes, setDislikes] = useState(review.dislikes);
-  const [reviewText, setReview] = useState(review.review);
+  const [newReviewText, setReview] = useState(review.review);
   const [clicked, setClicked] = useState(false);
   const [studentID, setStudentID] = useState("");
 
@@ -37,18 +37,21 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
     }
   };
 
-  const handleEditButton = async (newReview) => {
-    setReview(newReview)
+  const handleEditButton = async () => {
     console.log("edit button clicked")
+    console.log(newReviewText);
 
-    handleUpdate(review.id, {
-      ...review
-      // ,review: newText
-    })
+    if (Number(studentID) === review.student_id) {
+      handleUpdate(review.id, {
+        ...review,
+        review: newReviewText
+      })
+
+      window.location = "/";
+    }
   }
 
-  // TO DO ---------------------------------------------------------------------------
-  // makes the review text editable?
+
   const handleDeleteButton = async () => {
     if (Number(studentID) === review.student_id) {
       handleDelete(review.id)
@@ -85,6 +88,12 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
         <button onClick={handleEditButton}>
           Edit
         </button>
+      </div>
+      <div>
+        <input 
+          placeholder="Edit review..."
+          value={newReviewText}
+          onChange={({ target }) => setReview(target.value)} />
       </div>
       <div>
         <input
