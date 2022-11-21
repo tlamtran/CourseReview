@@ -46,14 +46,14 @@ const App = () => {
   }
 
     useEffect(() => {
-    studentServices.getStudents().then((response) => setStudents(response));
-  }, []);
+      studentServices.getStudents().then((response) => setStudents(response));
+    }, []);
 
   return (
     <StyletronProvider value={engine}>
       <BaseProvider theme={LightTheme}>
         <div className="container">
-          <Header text="Course reviews" students={students}/>
+          <Header text="Course reviews" />
           <Filters setCourses={setCourses} />
           <CourseList courses={courses} fetch={fetchCourseReviews} />
           <Reviews

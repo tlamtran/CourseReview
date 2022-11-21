@@ -81,9 +81,10 @@ app.put("/reviews/:id", (req, res) => {
   const { id } = req.params;
   const { likes } = req.body;
   const { dislikes } = req.body;
+  const { review } = req.body;
   client.query(
-    "UPDATE reviews SET likes=$1, dislikes=$2 WHERE id=$3",
-    [likes, dislikes, id],
+    "UPDATE reviews SET review=$1, likes=$2, dislikes=$3 WHERE id=$4",
+    [review, likes, dislikes, id],
     (err, response) => {
       if (!err) {
         res.json("Review was updated");

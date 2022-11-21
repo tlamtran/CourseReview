@@ -10,7 +10,10 @@ import Toggleable from "./Toggleable";
 const Review = ({ review, handleUpdate, handleDelete }) => {
   const [likes, setLikes] = useState(review.likes);
   const [dislikes, setDislikes] = useState(review.dislikes);
+  const [reviewText, setReview] = useState(review.review);
   const [clicked, setClicked] = useState(false);
+  const [studentID, setStudentID] = useState(0);
+  const [editClicked, setEditClicked] = useState(true);
 
 
   const handleLike = async () => {
@@ -18,6 +21,7 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
       setLikes(likes + 1);
       setClicked(true);
       handleUpdate(review.id, {
+        review: reviewText,
         likes: likes + 1,
         dislikes: dislikes
       })
@@ -29,6 +33,7 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
       setDislikes(dislikes + 1);
       setClicked(true);
       handleUpdate(review.id, {
+        review: reviewText,
         likes: likes,
         dislikes: dislikes + 1
       })
@@ -36,24 +41,31 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
   };
 
   const handleDeleteButton = async () => {
-    try {
-      const deleteReview = await fetch(`http://localhost:3001/reviews/${review.id}`, {
-        method: "DELETE"
-      });
+    if (parseInt(studentID) === review.student_id) {
+      try {
+        const deleteReview = await fetch(`http://localhost:3001/reviews/${review.id}`, {
+          method: "DELETE"
+        });
 
-      handleDelete(review.id);
-      
-      console.log(deleteReview);
-    } catch (err) {
-      console.error(err.message)
+        handleDelete(review.id);
+        
+        console.log(deleteReview);
+      } catch (err) {
+        console.error(err.message)
+      }
     }
   }
 
   const handleEditButton = async (newReview) => {
+      setReview(newReview)
       handleUpdate(review.id, {
-        review: newReview,
+        review: reviewText,
+        likes: likes,
+        dislikes: dislikes
       })
   }
+
+
 
   return (
     <div className="review">
@@ -84,6 +96,9 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
       <button onClick={handleEditButton}>
         Edit
       </button>
+      <div>
+        <input placeholder="Student ID to Edit/Delete" onChange={({ target }) => setStudentID(target.value)} />
+      </div>
     </div>
   );
 };

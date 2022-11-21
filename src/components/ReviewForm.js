@@ -13,7 +13,7 @@ const ReviewForm = ({ handleAdd, code, toggle }) => {
   const addReview = async (event) => {
     event.preventDefault();
     const newReview = {
-      student_id: studentID,
+      student_id: sessionStorage.getItem('loginID'),
       likes: 0,
       dislikes: 0,
       course_id: code,
