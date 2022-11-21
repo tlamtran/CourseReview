@@ -12,8 +12,7 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
   const [dislikes, setDislikes] = useState(review.dislikes);
   const [reviewText, setReview] = useState(review.review);
   const [clicked, setClicked] = useState(false);
-  const [studentID, setStudentID] = useState(0);
-  const [editClicked, setEditClicked] = useState(true);
+  const [studentID, setStudentID] = useState("");
 
 
   const handleLike = async () => {
@@ -21,9 +20,8 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
       setLikes(likes + 1);
       setClicked(true);
       handleUpdate(review.id, {
-        review: reviewText,
+        ...review,
         likes: likes + 1,
-        dislikes: dislikes
       })
     }
   };
@@ -33,44 +31,34 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
       setDislikes(dislikes + 1);
       setClicked(true);
       handleUpdate(review.id, {
-        review: reviewText,
-        likes: likes,
+        ...review,
         dislikes: dislikes + 1
       })
     }
   };
 
-  const handleDeleteButton = async () => {
-    if (parseInt(studentID) === review.student_id) {
-      try {
-        const deleteReview = await fetch(`http://localhost:3001/reviews/${review.id}`, {
-          method: "DELETE"
-        });
+  const handleEditButton = async (newReview) => {
+    setReview(newReview)
+    console.log("edit button clicked")
 
-        handleDelete(review.id);
-        
-        console.log(deleteReview);
-      } catch (err) {
-        console.error(err.message)
-      }
+    handleUpdate(review.id, {
+      ...review
+      // ,review: newText
+    })
+  }
+
+  // TO DO ---------------------------------------------------------------------------
+  // makes the review text editable?
+  const handleDeleteButton = async () => {
+    if (Number(studentID) === review.student_id) {
+      handleDelete(review.id)
     }
   }
-
-  const handleEditButton = async (newReview) => {
-      setReview(newReview)
-      handleUpdate(review.id, {
-        review: reviewText,
-        likes: likes,
-        dislikes: dislikes
-      })
-  }
-
-
 
   return (
     <div className="review">
       <div>
-        <p style={{ "fontSize": "0.75em" }}>{review.student_id}</p>
+        <p style={{ "fontSize": "0.75em" }}>{review.student_id} (hidden later)</p>
         <p>{review.review}</p>
         <div>
           difficulty <StarReview starValue={review.difficulty} />
@@ -82,26 +70,33 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
           teaching <StarReview starValue={review.teaching} />
         </div>
       </div>
-      <button onClick={handleLike}>
-        <AiOutlineLike />
-        {likes}
-      </button>
-      <button onClick={handleDislike}>
-        <AiOutlineDislike />
-        {dislikes}
-      </button>
-      <button onClick={handleDeleteButton}>
-        Delete
-      </button>
-      <button onClick={handleEditButton}>
-        Edit
-      </button>
+      <div style={{ display: "flex", flexDirection: "row" }}>
+        <button onClick={handleLike}>
+          <AiOutlineLike />
+          {likes}
+        </button>
+        <button onClick={handleDislike}>
+          <AiOutlineDislike />
+          {dislikes}
+        </button>
+        <button onClick={handleDeleteButton}>
+          Delete
+        </button>
+        <button onClick={handleEditButton}>
+          Edit
+        </button>
+      </div>
       <div>
-        <input placeholder="Student ID to Edit/Delete" onChange={({ target }) => setStudentID(target.value)} />
+        <input
+          placeholder="Student ID to Edit/Delete"
+          value={studentID}
+          onChange={({ target }) => setStudentID(target.value)} />
       </div>
     </div>
   );
 };
+
+
 
 const Reviews = ({ code, reviews, handleAdd, handleUpdate, handleDelete }) => {
   const reviewFormRef = useRef();

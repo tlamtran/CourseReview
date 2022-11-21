@@ -7,29 +7,33 @@ const ReviewForm = ({ handleAdd, code, toggle }) => {
   const [difficulty, setDifficulty] = useState(0);
   const [workLoad, setWorkload] = useState(0);
   const [teaching, setTeaching] = useState(0);
-  const [studentID, setStudentID] = useState();
+  const [studentID, setStudentID] = useState("");
 
 
   const addReview = async (event) => {
     event.preventDefault();
-    const newReview = {
-      student_id: sessionStorage.getItem('loginID'),
-      likes: 0,
-      dislikes: 0,
-      course_id: code,
-      review: text,
-      difficulty: Math.max(difficulty, 1),
-      workload: Math.max(workLoad, 1),
-      teaching: Math.max(teaching, 1)
-    };
-    handleAdd(newReview);
-
-    setText("");
-    setDifficulty(0);
-    setWorkload(0);
-    setTeaching(0);
-    setStudentID();
-    toggle.current.toggleVisibility()
+    if (text.length === 0 || studentID.length === 0) {
+      window.alert("Review text or student id missing.")
+    }
+    else {
+      const newReview = {
+        student_id: Number(studentID),
+        likes: 0,
+        dislikes: 0,
+        course_id: code,
+        review: text,
+        difficulty: Math.max(difficulty, 1),
+        workload: Math.max(workLoad, 1),
+        teaching: Math.max(teaching, 1)
+      };
+      handleAdd(newReview);
+      setText("");
+      setDifficulty(0);
+      setWorkload(0);
+      setTeaching(0);
+      setStudentID("");
+      toggle.current.toggleVisibility()
+    }
   };
 
   return (
@@ -48,8 +52,9 @@ const ReviewForm = ({ handleAdd, code, toggle }) => {
           <StarReview starValue={teaching} setStarValue={setTeaching} />
         </div>
         <TextArea areaType={"review"} text={text} setText={setText} />
+        Student ID
         <input
-          placeholder="Optional student number"
+          placeholder="6-7 digits"
           value={studentID}
           type="number"
           onChange={({ target }) => setStudentID(target.value)}

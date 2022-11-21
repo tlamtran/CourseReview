@@ -76,35 +76,16 @@ app.get("/reviews/:id", (req, res) => {
   );
 });
 
-// UPDATE REVIEW
+// UPDATE REVIEW (likes, dislikes, new text) now this handles them all
 app.put("/reviews/:id", (req, res) => {
   const { id } = req.params;
-  const { likes } = req.body;
-  const { dislikes } = req.body;
-  const { review } = req.body;
+  const { student_id, review, course_id, likes, dislikes, difficulty, workload, teaching } = req.body;
   client.query(
-    "UPDATE reviews SET review=$1, likes=$2, dislikes=$3 WHERE id=$4",
-    [review, likes, dislikes, id],
-    (err, response) => {
+    "UPDATE reviews SET student_id=$2, review=$3, course_id=$4, likes=$5, dislikes=$6, difficulty=$7, workload=$8, teaching=$9 WHERE id=$1 RETURNING *",
+    [id, student_id, review, course_id, likes, dislikes, difficulty, workload, teaching],
+    (err, result) => {
       if (!err) {
-        res.json("Review was updated");
-        console.log("Successfully updated review");
-      } else {
-        console.log(err.message);
-      }
-    }
-  );
-});
-
-app.put("/reviews/:id", (req, res) => {
-  const { id } = req.params;
-  const { review } = req.body;
-  client.query(
-    "UPDATE reviews SET review=$1 WHERE id=$2",
-    [review, id],
-    (err, response) => {
-      if (!err) {
-        res.json("Review was updated");
+        res.json(result.rows[0]);
         console.log("Successfully updated review");
       } else {
         console.log(err.message);
@@ -114,68 +95,25 @@ app.put("/reviews/:id", (req, res) => {
 });
 
 // DELETE REVIEW
-app.delete("/reviews/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const deleteReview = await client.query(
-      "DELETE FROM reviews WHERE id = $1",
-      [id],
-      (err, response) => {
-        if (!err) {
-          res.json("Review was deleted");
-          console.log("Successfully deleted review");
-        } else {
-          console.log(err.message);
-        }
-        client.end;
-      }
-    );
-  } catch (err) {
-    console.log(err.message);
-  }
-});
-
-
-
-//------STUDENTS TABLE ROUTES-------//
-
-app.get("/students", (req, res) => {
-  client.query("SELECT * FROM students", (err, result) => {
-    if (!err) {
-      const resultRows = result.rows;
-      res.json(resultRows);
-      console.log("Successfully fetched data");
-    } else {
-      console.log(err.message);
-    }
-    client.end;
-  });
-});
-
-
-app.get("/students/:id", (req, res) => {
+app.delete("/reviews/:id", (req, res) => {
   const { id } = req.params;
-  client.query(
-    "SELECT * FROM students WHERE student_id = $1",
+  const deleteReview = client.query(
+    "DELETE FROM reviews WHERE id = $1",
     [id],
-    (err, result) => {
+    (err, response) => {
       if (!err) {
-        res.json(result.rows);
-        console.log("Successfully fetched data");
-        return true;
+        res.json("Review was deleted");
+        console.log("Successfully deleted review");
       } else {
         console.log(err.message);
-        return false;
       }
       client.end;
     }
   );
 });
 
-
-
-
-
+// Get verified ids?
+// app.get("/verified", (req, res) => {}
 
 const PORT = 3001;
 app.listen(PORT, () => {

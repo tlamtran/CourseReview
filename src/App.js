@@ -31,16 +31,24 @@ const App = () => {
   };
 
   const handleAdd = async (newReview) => {
-    const response = await reviewServices.create(newReview);
-    setReviews(reviews.concat(response));
+    if (reviews.map(review => review.student_id).includes(newReview.student_id)) {
+      window.alert("Student id already used!")
+    }
+    else {
+      const response = await reviewServices.create(newReview);
+      setReviews(reviews.concat(response));
+    }
   };
 
   const handleUpdate = async (id, updatedReview) => {
-    await reviewServices.update(id, updatedReview);
+    const response = await reviewServices.update(id, updatedReview);
+    console.log(response)
+    //setReviews(reviews.map(review => review.id === id ? response : review))
   };
 
   const handleDelete = async (id) => {
     setReviews(reviews.filter(review => review.id !== id))
+    await reviewServices.remove(id)
   }
 
 

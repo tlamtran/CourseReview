@@ -12,11 +12,15 @@ const create = async newReview => {
 }
 
 const update = async (id, updated) => {
-  console.log(updated)
   const response = await axios.put(`${baseUrl}/${id}`, updated)
   return response.data
 }
 
-const reviewServices = { getReview, create, update };
+const remove = async (id) => {
+  const response = await axios.delete(`${baseUrl}/${id}`)
+  return response.data
+}
+
+const reviewServices = { getReview, create, update, remove };
 
 export default reviewServices;
