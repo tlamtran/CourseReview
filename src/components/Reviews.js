@@ -1,6 +1,7 @@
 import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineDislike } from "react-icons/ai";
 import { useState, useRef } from "react";
+import TextArea from "./TextArea";
 import StarReview from "./StarReview";
 import ReviewsStats from "./ReviewsStats";
 import ReviewForm from "./ReviewForm";
@@ -58,6 +59,32 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
     }
   }
 
+
+  function Editing() {
+    if (Number(studentID) === review.student_id) {
+      return (
+        <div>
+          <button onClick={handleDeleteButton}>
+            Delete
+          </button>
+          <button onClick={handleEditButton}>
+            Edit
+          </button>
+        </div>
+      );
+    }
+  }
+
+  function EditingBox() {
+    if (Number(studentID) === review.student_id) {
+      return (
+        <div>
+        <TextArea areaType={"review"} text={newReviewText} setText={setReview} />
+      </div>
+      );
+    }
+  }
+
   return (
     <div className="review">
       <div>
@@ -82,25 +109,13 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
           <AiOutlineDislike />
           {dislikes}
         </button>
-        <button onClick={handleDeleteButton}>
-          Delete
-        </button>
-        <button onClick={handleEditButton}>
-          Edit
-        </button>
-      </div>
-      <div>
-        <input 
-          placeholder="Edit review..."
-          value={newReviewText}
-          onChange={({ target }) => setReview(target.value)} />
-      </div>
-      <div>
         <input
           placeholder="Student ID to Edit/Delete"
           value={studentID}
           onChange={({ target }) => setStudentID(target.value)} />
       </div>
+      <EditingBox />
+      <Editing />
     </div>
   );
 };
