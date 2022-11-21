@@ -11,7 +11,6 @@ import CourseList from "./components/CourseList";
 import Reviews from "./components/Reviews";
 import courseServices from "./services/courses";
 import reviewServices from "./services/review";
-import studentServices from "./services/student";
 import { useEffect, useState } from "react";
 import "./App.css";
 import Filters from "./components/Filters";
@@ -20,7 +19,6 @@ const App = () => {
   const [courses, setCourses] = useState([]);
   const [code, setCode] = useState(null);
   const [reviews, setReviews] = useState(null);
-  const [students, setStudents] = useState([]);
 
   useEffect(() => {
     courseServices.getCourses().then((response) => setCourses(response));
@@ -45,16 +43,13 @@ const App = () => {
     setReviews(reviews.filter(review => review.id !== id))
   }
 
-    useEffect(() => {
-      studentServices.getStudents().then((response) => setStudents(response));
-    }, []);
 
   return (
     <StyletronProvider value={engine}>
       <BaseProvider theme={LightTheme}>
         <div className="container">
           <Header text="Course reviews" />
-          <Filters setCourses={setCourses} />
+          <Filters setCourses={setCourses} courses={courses} />
           <CourseList courses={courses} fetch={fetchCourseReviews} />
           <Reviews
             code={code}

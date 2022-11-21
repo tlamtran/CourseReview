@@ -1,7 +1,7 @@
 import ChevronRight from 'baseui/icon/chevron-right'
 import { StatefulMenu } from 'baseui/menu'
 import { ListItemLabel, MenuAdapter } from 'baseui/list'
-import React from 'react'
+import React, { useState } from 'react'
 
 const Course = React.forwardRef((props, ref) => (
     <MenuAdapter
@@ -16,12 +16,22 @@ const Course = React.forwardRef((props, ref) => (
 ))
 
 const CourseList = ({ courses, fetch }) => {
+    const [search, setSearch] = useState("")
 
     return (
         <div className="courses">
+            <input
+                className="search"
+                value={search}
+                onChange={({ target }) => setSearch(target.value)}
+                placeholder="Search by course name"
+            />
             <StatefulMenu
-                items={courses}
-                onItemSelect={item => fetch(item.item.code)} // Route Link??
+                items={courses.filter(course =>
+                    course.name.en.toLowerCase()
+                        .includes(search))
+                    .slice(0, 30)}
+                onItemSelect={item => fetch(item.item.code)}
                 overrides={{
                     List: {
                         style: {
@@ -46,7 +56,7 @@ const CourseList = ({ courses, fetch }) => {
                         }
                     }
                 }}
-                />
+            />
         </div>
     )
 }

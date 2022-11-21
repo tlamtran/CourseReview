@@ -2,32 +2,18 @@ import { Checkbox } from "baseui/checkbox"
 import { useEffect, useState } from "react";
 import courseServices from "../services/courses";
 
-const Filters = ({ setCourses }) => {
-  const [filters, setFilters] = useState([])
-  const [search, setSearch] = useState("")
+const Filters = ({ setCourses, courses }) => {
   const [minor, setMinor] = useState(false)
-  // major checkboxes
-  const [majorCheckboxes, setMajorCheckboxes] = useState([true, false])
+  const [elective, setElective] = useState(false)
+  const [majorCheckboxes, setMajorCheckboxes] = useState([false, false])
   const majorAllChecked = majorCheckboxes.every(x => x === true)
   const isIndeterminate = majorCheckboxes.some(Boolean) && !majorAllChecked
 
 
-  useEffect(() => {
-
-  }, [filters])
-
   return (
     <div className="filters">
-      <div style={{ display: "inline-block", marginBottom: 20 }}>
-        <b style={{ fontSize: 25, marginRight: 25 }}>Courses</b>
-        <input
-          className="searchbar"
-          value={search}
-          onChange={({ target }) => setSearch(target.value)}
-          placeholder="Search by code/name"
-        />
-      </div>
-      <div className="checkboxes">
+      <h2 style={{ paddingLeft: 10 }}>Courses</h2>
+      <div className="checkboxes" style={{ paddingLeft: 20 }}>
         <Checkbox
           checked={majorAllChecked}
           onChange={e => {
@@ -57,6 +43,9 @@ const Filters = ({ setCourses }) => {
         </div>
         <Checkbox checked={minor} onChange={() => setMinor(!minor)}>
           Minor studies
+        </Checkbox>
+        <Checkbox checked={elective} onChange={() => setElective(!elective)}>
+          Elective studies
         </Checkbox>
       </div>
     </div>
