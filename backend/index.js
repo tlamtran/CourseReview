@@ -95,6 +95,23 @@ app.put("/reviews/:id", (req, res) => {
   );
 });
 
+app.put("/reviews/:id", (req, res) => {
+  const { id } = req.params;
+  const { review } = req.body;
+  client.query(
+    "UPDATE reviews SET review=$1 WHERE id=$2",
+    [review, id],
+    (err, response) => {
+      if (!err) {
+        res.json("Review was updated");
+        console.log("Successfully updated review");
+      } else {
+        console.log(err.message);
+      }
+    }
+  );
+});
+
 // DELETE REVIEW
 app.delete("/reviews/:id", async (req, res) => {
   try {
@@ -133,6 +150,30 @@ app.get("/students", (req, res) => {
     client.end;
   });
 });
+
+
+app.get("/students/:id", (req, res) => {
+  const { id } = req.params;
+  client.query(
+    "SELECT * FROM students WHERE student_id = $1",
+    [id],
+    (err, result) => {
+      if (!err) {
+        res.json(result.rows);
+        console.log("Successfully fetched data");
+        return true;
+      } else {
+        console.log(err.message);
+        return false;
+      }
+      client.end;
+    }
+  );
+});
+
+
+
+
 
 
 const PORT = 3001;

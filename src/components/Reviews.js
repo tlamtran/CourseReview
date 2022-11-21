@@ -49,6 +49,12 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
     }
   }
 
+  const handleEditButton = async (newReview) => {
+      handleUpdate(review.id, {
+        review: newReview,
+      })
+  }
+
   return (
     <div className="review">
       <div>
@@ -74,6 +80,9 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
       </button>
       <button onClick={handleDeleteButton}>
         Delete
+      </button>
+      <button onClick={handleEditButton}>
+        Edit
       </button>
     </div>
   );
