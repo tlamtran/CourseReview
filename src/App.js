@@ -42,8 +42,7 @@ const App = () => {
 
   const handleUpdate = async (id, updatedReview) => {
     const response = await reviewServices.update(id, updatedReview);
-    console.log(response)
-    //setReviews(reviews.map(review => review.id === id ? response : review))
+    setReviews(reviews.map(review => review.id === id ? response : review))
   };
 
   const handleDelete = async (id) => {

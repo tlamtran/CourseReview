@@ -1,12 +1,13 @@
 import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineDislike } from "react-icons/ai";
 import { useState, useRef, useEffect } from "react";
-import axios from 'axios'
-import TextArea from "./TextArea";
+
 import StarReview from "./StarReview";
 import ReviewsStats from "./ReviewsStats";
 import ReviewForm from "./ReviewForm";
+import EditForm from "./EditForm";
 import Toggleable from "./Toggleable";
+import studentServices from "../services/students"
 
 
 const Review = ({ review, handleUpdate, handleDelete }) => {
@@ -15,9 +16,11 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
   const [newReviewText, setReview] = useState(review.review);
   const [clicked, setClicked] = useState(false);
   const [studentID, setStudentID] = useState("");
-
   const [studentList, setStudents] = useState([]);
 
+  useEffect(() => {
+    studentServices.getStudents().then((response) => setStudents(response));
+  }, []);
 
   const handleLike = async () => {
     if (!clicked) {
@@ -30,7 +33,8 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
     }
   };
 
-  const handleDislike = async () => {
+  const handleDislike = async (event) => {
+    event.preventDefault()
     if (!clicked) {
       setDislikes(dislikes + 1);
       setClicked(true);
@@ -41,77 +45,26 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
     }
   };
 
-  const handleEditButton = async () => {
-    console.log("edit button clicked")
-    console.log(newReviewText);
-
-    if (Number(studentID) === review.student_id) {
-      handleUpdate(review.id, {
-        ...review,
-        review: newReviewText
-      })
-
-      window.location = "/";
-    }
+  const handleEdit = async (event) => {
+    event.preventDefault()
+    handleUpdate(review.id, {
+      ...review,
+      review: newReviewText
+    })
   }
 
-
-  const handleDeleteButton = async () => {
-    if (Number(studentID) === review.student_id) {
-      handleDelete(review.id)
-    }
+  const handleRemove = async (event) => {
+    event.preventDefault()
+    handleDelete(review.id)
   }
 
-
-  // CHECK IF USER IS VERIFIED --------------------
-  const baseUrl = "http://localhost:3001/verified";
-
-  const getStudents = async () => {
-    const response = await axios.get(`${baseUrl}`);
-    return response.data;
-  };
-
-  
-  useEffect(() => {
-    getStudents().then((response) => setStudents(response));
-  }, []);
-
-
-  function Verified() {
-    for (let i = 0; i < studentList.length; i++) {
-      if (review.student_id === studentList[i]["id"]) {
-        return (
-          <div>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Twitter_Verified_Badge.svg/768px-Twitter_Verified_Badge.svg.png" width={20}/>
-          </div>
-        )
-      }
-    }
-  }
-  // ----------------------------------------------
-
-  function Editing() {
-    if (Number(studentID) === review.student_id) {
+  const Verified = () => {
+    if (studentList.map(student => student.id).includes(review.student_id)) {
       return (
         <div>
-          <button onClick={handleDeleteButton}>
-            Delete
-          </button>
-          <button onClick={handleEditButton}>
-            Edit
-          </button>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Twitter_Verified_Badge.svg/768px-Twitter_Verified_Badge.svg.png" width={20} />
         </div>
-      );
-    }
-  }
-
-  function EditingBox() {
-    if (Number(studentID) === review.student_id) {
-      return (
-        <div>
-        <TextArea areaType={"review"} text={newReviewText} setText={setReview} />
-      </div>
-      );
+      )
     }
   }
 
@@ -145,8 +98,13 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
           value={studentID}
           onChange={({ target }) => setStudentID(target.value)} />
       </div>
-      <EditingBox />
-      <Editing />
+      {Number(studentID) === review.student_id
+        ? <EditForm
+          handleEdit={handleEdit}
+          handleRemove={handleRemove}
+          setReview={setReview}
+          text={newReviewText} />
+        : null}
     </div>
   );
 };
