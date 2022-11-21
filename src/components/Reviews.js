@@ -1,6 +1,7 @@
 import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineDislike } from "react-icons/ai";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import axios from 'axios'
 import TextArea from "./TextArea";
 import StarReview from "./StarReview";
 import ReviewsStats from "./ReviewsStats";
@@ -14,6 +15,8 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
   const [newReviewText, setReview] = useState(review.review);
   const [clicked, setClicked] = useState(false);
   const [studentID, setStudentID] = useState("");
+
+  const [studentList, setStudents] = useState([]);
 
 
   const handleLike = async () => {
@@ -60,6 +63,33 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
   }
 
 
+  // CHECK IF USER IS VERIFIED --------------------
+  const baseUrl = "http://localhost:3001/verified";
+
+  const getStudents = async () => {
+    const response = await axios.get(`${baseUrl}`);
+    return response.data;
+  };
+
+  
+  useEffect(() => {
+    getStudents().then((response) => setStudents(response));
+  }, []);
+
+
+  function Verified() {
+    for (let i = 0; i < studentList.length; i++) {
+      if (review.student_id === studentList[i]["id"]) {
+        return (
+          <div>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Twitter_Verified_Badge.svg/768px-Twitter_Verified_Badge.svg.png" width={20}/>
+          </div>
+        )
+      }
+    }
+  }
+  // ----------------------------------------------
+
   function Editing() {
     if (Number(studentID) === review.student_id) {
       return (
@@ -89,6 +119,7 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
     <div className="review">
       <div>
         <p style={{ "fontSize": "0.75em" }}>{review.student_id} (hidden later)</p>
+        <Verified />
         <p>{review.review}</p>
         <div>
           difficulty <StarReview starValue={review.difficulty} />

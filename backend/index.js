@@ -112,8 +112,23 @@ app.delete("/reviews/:id", (req, res) => {
   );
 });
 
-// Get verified ids?
-// app.get("/verified", (req, res) => {}
+
+
+app.get("/verified", (req, res) => {
+  client.query("SELECT * FROM verified_ids", (err, result) => {
+    if (!err) {
+      const resultRows = result.rows;
+      res.json(resultRows);
+      console.log("Successfully fetched data");
+    } else {
+      console.log(err.message);
+    }
+    client.end;
+  });
+});
+
+
+
 
 const PORT = 3001;
 app.listen(PORT, () => {
