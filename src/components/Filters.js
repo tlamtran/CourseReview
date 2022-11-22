@@ -2,12 +2,9 @@ import { Checkbox } from "baseui/checkbox"
 import { useState } from "react";
 import courseServices from "../services/courses";
 
-const Filters = ({ setCourses, courses }) => {
-  const [minor, setMinor] = useState(false)
-  const [elective, setElective] = useState(false)
-  const [majorCheckboxes, setMajorCheckboxes] = useState([false, false])
-  const majorAllChecked = majorCheckboxes.every(x => x === true)
-  const isIndeterminate = majorCheckboxes.some(Boolean) && !majorAllChecked
+const Filters = ({ setCourses, courses, filters, setFilters }) => {
+  const majorAllChecked = (filters[0] && filters[1])
+  const isIndeterminate = (filters[0] || filters[1]) && !majorAllChecked
 
 
   return (
@@ -17,7 +14,7 @@ const Filters = ({ setCourses, courses }) => {
         <Checkbox
           checked={majorAllChecked}
           onChange={e => {
-            setMajorCheckboxes([e.target.checked, e.target.checked]);
+            setFilters([e.target.checked, e.target.checked, filters[2]]);
           }}
           isIndeterminate={isIndeterminate}
         >
@@ -25,27 +22,29 @@ const Filters = ({ setCourses, courses }) => {
         </Checkbox>
         <div style={{ padding: 8, paddingLeft: 20 }}>
           <Checkbox
-            checked={majorCheckboxes[0]}
+            checked={filters[0]}
             onChange={e => {
-              setMajorCheckboxes([e.target.checked, majorCheckboxes[1]]);
+              setFilters([e.target.checked, filters[1], filters[2]]);
             }}
           >
             Basic studies
           </Checkbox>
           <Checkbox
-            checked={majorCheckboxes[1]}
+            checked={filters[1]}
             onChange={e => {
-              setMajorCheckboxes([majorCheckboxes[0], e.target.checked]);
+              setFilters([filters[0], e.target.checked, filters[2]]);
             }}
           >
             Major studies
           </Checkbox>
         </div>
-        <Checkbox checked={minor} onChange={() => setMinor(!minor)}>
+        <Checkbox
+          checked={filters[2]}
+          onChange={e => {
+            setFilters([filters[0], filters[1], e.target.checked]);
+          }}
+        >
           Minor studies
-        </Checkbox>
-        <Checkbox checked={elective} onChange={() => setElective(!elective)}>
-          Elective studies
         </Checkbox>
       </div>
     </div>

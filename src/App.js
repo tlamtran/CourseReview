@@ -19,10 +19,24 @@ const App = () => {
   const [courses, setCourses] = useState([]);
   const [code, setCode] = useState(null);
   const [reviews, setReviews] = useState(null);
+  const [filters, setFilters] = useState([false, false, false])
+  const [filterCourses, setFilterCourses] = useState([])
 
   useEffect(() => {
     courseServices.getCourses().then((response) => setCourses(response));
   }, []);
+
+  useEffect(() => {
+    const basic = filters[0] ? courseServices.getBasic() : []
+    const major = filters[1] ? courseServices.getMajor() : []
+    const minor = filters[2] ? courseServices.getMinor() : []
+    const toDisplay = [].concat(basic, major, minor)
+    console.log(filters)
+    console.log(basic)
+    console.log(major)
+    console.log(minor)
+    setFilterCourses([].concat(basic, major, minor))
+  }, [filters])
 
   const fetchCourseReviews = async (code) => {
     const response = await reviewServices.getReview(code);
@@ -56,8 +70,15 @@ const App = () => {
       <BaseProvider theme={LightTheme}>
         <div className="container">
           <Header text="Course reviews" />
-          <Filters setCourses={setCourses} courses={courses} />
-          <CourseList courses={courses} fetch={fetchCourseReviews} />
+          <Filters
+            setCourses={setCourses}
+            courses={courses}
+            filters={filters}
+            setFilters={setFilters} />
+          <CourseList
+            courses={courses}
+            fetch={fetchCourseReviews}
+            filterCourses={filterCourses} />
           <Reviews
             code={code}
             reviews={reviews}

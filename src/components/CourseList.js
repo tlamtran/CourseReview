@@ -1,22 +1,18 @@
-import ChevronRight from 'baseui/icon/chevron-right'
-import { StatefulMenu } from 'baseui/menu'
-import { ListItemLabel, MenuAdapter } from 'baseui/list'
-import React, { useState } from 'react'
+import ChevronRight from "baseui/icon/chevron-right";
+import { StatefulMenu } from "baseui/menu";
+import { ListItemLabel, MenuAdapter } from "baseui/list";
+import React, { useState } from "react";
 
 const Course = React.forwardRef((props, ref) => (
-    <MenuAdapter
-        {...props}
-        ref={ref}
-        endEnhancer={() => <ChevronRight />}
-    >
+    <MenuAdapter {...props} ref={ref} endEnhancer={() => <ChevronRight />}>
         <ListItemLabel>
             {props.item.code} - {props.item.name.en}
         </ListItemLabel>
     </MenuAdapter>
-))
+));
 
-const CourseList = ({ courses, fetch }) => {
-    const [search, setSearch] = useState("")
+const CourseList = ({ courses, fetch, filterCourses }) => {
+    const [search, setSearch] = useState("");
 
     return (
         <div className="courses">
@@ -27,40 +23,45 @@ const CourseList = ({ courses, fetch }) => {
                 placeholder="Search by course name"
             />
             <StatefulMenu
-                items={courses.filter(course =>
-                    course.name.en.toLowerCase()
-                        .includes(search))
-                    .slice(0, 30)}
-                onItemSelect={item => fetch(item.item.code)}
+                items={
+                    filterCourses.length === 0
+                        ? courses
+                            .filter((course) =>
+                                course.name.en.toLowerCase().includes(search)
+                            )
+                            .slice(0, 30)
+                        : filterCourses
+                }
+                onItemSelect={(item) => fetch(item.item.code)}
                 overrides={{
                     List: {
                         style: {
-                            boxShadow: '0px 0px 0px',
+                            boxShadow: "0px 0px 0px",
                             gridColumnStart: 1,
                             gridColumnEnd: 2,
                             gridRowStart: 3,
                             gridRowEnd: 4,
-                            maxHeight: '40vh',
-                            padding: '0px',
-                            borderRadius: '0px',
-                            paddingLeft: '10px'
-                        }
+                            maxHeight: "40vh",
+                            padding: "0px",
+                            borderRadius: "0px",
+                            paddingLeft: "10px",
+                        },
                     },
                     Option: {
                         props: {
                             overrides: {
                                 ListItem: {
-                                    component: Course
-                                }
-                            }
-                        }
-                    }
+                                    component: Course,
+                                },
+                            },
+                        },
+                    },
                 }}
             />
         </div>
-    )
-}
+    );
+};
 
-Course.displayName = 'Course'
+Course.displayName = "Course";
 
-export default CourseList
+export default CourseList;

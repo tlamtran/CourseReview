@@ -1,7 +1,7 @@
 const ReviewsStats = ({ reviews }) => {
   const score =
     reviews
-      .map((r) => (6 - r.difficulty) + r.teaching + (6 - r.workload))
+      .map((r) => r.difficulty + r.teaching + r.workload)
       .reduce((x, y) => x + y, 0) /
     (3 * reviews.length);
 
