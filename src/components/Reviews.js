@@ -117,6 +117,19 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
 
 const Reviews = ({ code, reviews, handleAdd, handleUpdate, handleDelete }) => {
   const reviewFormRef = useRef();
+  const [studentList, setStudents] = useState([]);
+  var verifiedReviews = [];
+  var nonVerifiedReviews = [];
+
+  useEffect(() => {
+    studentServices.getStudents().then((response) => setStudents(response));
+  }, []);
+
+  if (reviews !== null) {
+    verifiedReviews = reviews.filter(review => studentList.map(student => student.id).includes(review.student_id))
+    nonVerifiedReviews = reviews.filter(review => !studentList.map(student => student.id).includes(review.student_id))
+  }
+
 
   if (reviews === null) {
     return <p>select a course from the list</p>;
@@ -148,18 +161,16 @@ const Reviews = ({ code, reviews, handleAdd, handleUpdate, handleDelete }) => {
           />
         </Toggleable>
         <div>
-          {reviews.map(
-            (
-              review // should be sorted according to likes/dislikes
-            ) => (
-              <Review
-                review={review}
-                key={review.id}
-                handleUpdate={handleUpdate}
-                handleDelete={handleDelete}
-              />
-            )
-          )}
+          {verifiedReviews
+            .sort((a, b) => b.likes - a.likes)
+            .map((review) => (
+              <Review review={review} key={review.id} handleUpdate={handleUpdate} handleDelete={handleDelete} />
+            ))}
+          {nonVerifiedReviews
+            .sort((a, b) => b.likes - a.likes)
+            .map((review) => (
+              <Review review={review} key={review.id} handleUpdate={handleUpdate} handleDelete={handleDelete} />
+            ))}
         </div>
       </div>
     );
