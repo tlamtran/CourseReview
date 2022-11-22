@@ -87,15 +87,16 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
         </div>
       </div>
       <div style={{ display: "flex", flexDirection: "row" }}>
-        <button onClick={handleLike}>
+        <button className="like-dislike-btn" onClick={handleLike}>
           <AiOutlineLike />
           {likes}
         </button>
-        <button onClick={handleDislike}>
+        <button className="like-dislike-btn" onClick={handleDislike}>
           <AiOutlineDislike />
           {dislikes}
         </button>
         <input
+          className="student-id-input"
           placeholder="Student ID to Edit/Delete"
           value={studentID}
           onChange={({ target }) => setStudentID(target.value)}
