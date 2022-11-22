@@ -126,6 +126,8 @@ hr {
     padding: 0px 0px 10px 0px;
     min-height: 50px;
     width: 265px;
+    word-wrap: break-word;
+    text-align: justify;
 }
 
 .review-text-stars {
@@ -135,7 +137,8 @@ hr {
 
 
 .star-ratings {
-    margin-left: 10px;
+    margin-left: 20px;
+    margin-top: -3px;
 }
 
 .general-btn {
