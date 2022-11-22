@@ -1,5 +1,5 @@
 import { Checkbox } from "baseui/checkbox"
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import courseServices from "../services/courses";
 
 const Filters = ({ setCourses, courses }) => {

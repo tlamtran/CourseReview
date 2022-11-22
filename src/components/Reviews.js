@@ -7,8 +7,7 @@ import ReviewsStats from "./ReviewsStats";
 import ReviewForm from "./ReviewForm";
 import EditForm from "./EditForm";
 import Toggleable from "./Toggleable";
-import studentServices from "../services/students"
-
+import studentServices from "../services/students";
 
 const Review = ({ review, handleUpdate, handleDelete }) => {
   const [likes, setLikes] = useState(review.likes);
@@ -29,49 +28,52 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
       handleUpdate(review.id, {
         ...review,
         likes: likes + 1,
-      })
+      });
     }
   };
 
   const handleDislike = async (event) => {
-    event.preventDefault()
+    event.preventDefault();
     if (!clicked) {
       setDislikes(dislikes + 1);
       setClicked(true);
       handleUpdate(review.id, {
         ...review,
-        dislikes: dislikes + 1
-      })
+        dislikes: dislikes + 1,
+      });
     }
   };
 
   const handleEdit = async (event) => {
-    event.preventDefault()
+    event.preventDefault();
     handleUpdate(review.id, {
       ...review,
-      review: newReviewText
-    })
-  }
+      review: newReviewText,
+    });
+  };
 
   const handleRemove = async (event) => {
-    event.preventDefault()
-    handleDelete(review.id)
-  }
+    event.preventDefault();
+    handleDelete(review.id);
+  };
 
   const Verified = () => {
-    if (studentList.map(student => student.id).includes(review.student_id)) {
+    if (studentList.map((student) => student.id).includes(review.student_id)) {
       return (
         <div>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Twitter_Verified_Badge.svg/768px-Twitter_Verified_Badge.svg.png" width={20} />
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Twitter_Verified_Badge.svg/768px-Twitter_Verified_Badge.svg.png"
+            width={20}
+          />
         </div>
-      )
+      );
     }
-  }
+  };
 
   return (
     <div className="review">
       <div>
-        <p style={{ "fontSize": "0.75em" }}>{review.student_id} (hidden later)</p>
+        <p style={{ fontSize: "0.75em" }}>{review.student_id} (hidden later)</p>
         <Verified />
         <p>{review.review}</p>
         <div>
@@ -96,15 +98,17 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
         <input
           placeholder="Student ID to Edit/Delete"
           value={studentID}
-          onChange={({ target }) => setStudentID(target.value)} />
+          onChange={({ target }) => setStudentID(target.value)}
+        />
       </div>
-      {Number(studentID) === review.student_id
-        ? <EditForm
+      {Number(studentID) === review.student_id ? (
+        <EditForm
           handleEdit={handleEdit}
           handleRemove={handleRemove}
           setReview={setReview}
-          text={newReviewText} />
-        : null}
+          text={newReviewText}
+        />
+      ) : null}
     </div>
   );
 };
@@ -123,7 +127,11 @@ const Reviews = ({ code, reviews, handleAdd, handleUpdate, handleDelete }) => {
         <p>no reviews found</p>
         <ReviewsStats reviews={reviews} />
         <Toggleable buttonLabel="Write a review" ref={reviewFormRef}>
-          <ReviewForm handleAdd={handleAdd} toggle={reviewFormRef} code={code} />
+          <ReviewForm
+            handleAdd={handleAdd}
+            toggle={reviewFormRef}
+            code={code}
+          />
         </Toggleable>
       </div>
     );
@@ -133,12 +141,25 @@ const Reviews = ({ code, reviews, handleAdd, handleUpdate, handleDelete }) => {
         <h1>{code}</h1>
         <ReviewsStats reviews={reviews} />
         <Toggleable buttonLabel="Write a review" ref={reviewFormRef}>
-          <ReviewForm handleAdd={handleAdd} code={code} toggle={reviewFormRef} />
+          <ReviewForm
+            handleAdd={handleAdd}
+            code={code}
+            toggle={reviewFormRef}
+          />
         </Toggleable>
         <div>
-          {reviews.map((review) => ( // should be sorted according to likes/dislikes
-            <Review review={review} key={review.id} handleUpdate={handleUpdate} handleDelete={handleDelete} />
-          ))}
+          {reviews.map(
+            (
+              review // should be sorted according to likes/dislikes
+            ) => (
+              <Review
+                review={review}
+                key={review.id}
+                handleUpdate={handleUpdate}
+                handleDelete={handleDelete}
+              />
+            )
+          )}
         </div>
       </div>
     );
