@@ -20,10 +20,12 @@ const Toggleable = forwardRef((props, refs) => {
 
   return (
     <div>
-      <button className="general-btn" onClick={toggleVisibility} style={hideIfTrue}>
-        <BsPencil />
-        {" " + props.buttonLabel}
-      </button>
+      <div className="write-review">
+        <button className="general-btn" onClick={toggleVisibility} style={hideIfTrue}>
+          <BsPencil />
+          {" " + props.buttonLabel}
+        </button>
+      </div>
       <div style={showIfTrue}>{props.children}</div>
       <button className="general-btn" onClick={toggleVisibility} style={showIfTrue}>
         cancel

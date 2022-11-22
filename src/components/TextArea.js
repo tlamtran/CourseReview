@@ -16,7 +16,7 @@ const TextArea = ({ areaType, text, setText }) => {
           Input: {
             style: {
               maxWidth: "500px",
-              maxHeight: "300px",
+              maxHeight: "300px"
             },
           },
         }}

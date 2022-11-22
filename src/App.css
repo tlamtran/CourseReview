@@ -2,6 +2,10 @@ body {
     margin: 0px;
 }
 
+hr {
+    margin: 20px 0px 20px 0px;
+}
+
 .container {
     width: 100vw;
     height: 100vh;
@@ -17,6 +21,8 @@ body {
     font-family: 'Quicksand', sans-serif;
 }
 
+
+/* ---------- HEADER STYLING ---------- */
 .header {
     grid-column-start: 1;
     grid-column-end: 3;
@@ -42,7 +48,13 @@ body {
     font-style: normal;
     text-transform: uppercase;
 }
+/* ---------- ---------- */
 
+
+
+
+
+/* ---------- COURSES STYLING ---------- */
 .filters {
     grid-column-start: 1;
     grid-column-end: 2;
@@ -56,8 +68,12 @@ body {
     grid-row-start: 3;
     grid-row-end: 4;
 }
+/* ---------- ---------- */
 
 
+
+
+/* ---------- REVIEWS STYLING ---------- */
 
 .post-btn {
     border-radius: 30px;
@@ -66,7 +82,7 @@ body {
     
     background-color: white;
     padding: 5px 8px 5px 8px;
-    margin: 0px 5px 5px 5px;
+    margin: 0px 5px 5px 0px;
 }
 
 .post-btn:hover {
@@ -81,10 +97,24 @@ body {
     grid-row-end: 4;
     max-width: 50vw;
     overflow: auto;
+    padding-left: 20px;
 }
 
 .review {
-    padding: 20px;
+    padding: 20px 0px 20px 0px;
+}
+
+
+.review-and-stars {
+    display: flex;
+    flex-direction: row;
+
+    margin-bottom: 10px;
+}
+
+
+.star-ratings {
+    margin-left: 10px;
 }
 
 .general-btn {
@@ -94,11 +124,15 @@ body {
 
     background-color: white;
     padding: 5px 8px 5px 8px;
-    margin: 5px 5px 5px 5px;
+    margin: 5px 10px 5px 0px;
 }
 
 .general-btn:hover {
     background-color: #e1e1e1;
+}
+
+.write-review {
+    text-align: center;
 }
 
 .student-id-input {
@@ -107,10 +141,15 @@ body {
     border-color: black;
 
     padding: 5px 8px 5px 8px;
-    margin: 5px 5px 5px 5px;
+    margin: 5px 10px 5px 5px;
 }
+/* ---------- ---------- */
 
 
+
+
+
+/* ---------- FOOTER STYLING ---------- */
 .footer {
     font-size: 15px;
     grid-column-start: 1;
@@ -145,5 +184,5 @@ body {
     color: #787878;
     background-color: #333333;
 }
-
+/* ---------- ---------- */
 

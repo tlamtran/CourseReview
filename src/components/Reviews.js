@@ -136,7 +136,7 @@ const Reviews = ({ code, reviews, handleAdd, handleUpdate, handleDelete }) => {
     return <p>select a course from the list</p>;
   } else if (reviews.length < 1) {
     return (
-      <div>
+      <div className="reviews">
         <h1>{code}</h1>
         <p>no reviews found</p>
         <ReviewsStats reviews={reviews} />

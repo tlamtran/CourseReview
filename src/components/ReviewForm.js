@@ -38,21 +38,25 @@ const ReviewForm = ({ handleAdd, code, toggle }) => {
 
   return (
     <form onSubmit={addReview}>
-      <div>
-        <div>
-          difficulty {difficulty}
-          <StarReview starValue={difficulty} setStarValue={setDifficulty} />
+      <div className="review-form">
+        <div className="review-and-stars">
+          <TextArea areaType={"review"} text={text} setText={setText} />
+          <div className="star-ratings">
+            <div>
+              difficulty {difficulty}
+              <StarReview starValue={difficulty} setStarValue={setDifficulty} />
+            </div>
+            <div>
+              workload {workLoad}
+              <StarReview starValue={workLoad} setStarValue={setWorkload} />
+            </div>
+            <div>
+              teaching {teaching}
+              <StarReview starValue={teaching} setStarValue={setTeaching} />
+            </div>
+          </div>
         </div>
-        <div>
-          workload {workLoad}
-          <StarReview starValue={workLoad} setStarValue={setWorkload} />
-        </div>
-        <div>
-          teaching {teaching}
-          <StarReview starValue={teaching} setStarValue={setTeaching} />
-        </div>
-        <TextArea areaType={"review"} text={text} setText={setText} />
-        Student ID
+        Student ID 
         <input
           className="student-id-input"
           placeholder="6-7 digits"
