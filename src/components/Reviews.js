@@ -87,11 +87,11 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
         </div>
       </div>
       <div style={{ display: "flex", flexDirection: "row" }}>
-        <button className="like-dislike-btn" onClick={handleLike}>
+        <button className="general-btn" onClick={handleLike}>
           <AiOutlineLike />
           {likes}
         </button>
-        <button className="like-dislike-btn" onClick={handleDislike}>
+        <button className="general-btn" onClick={handleDislike}>
           <AiOutlineDislike />
           {dislikes}
         </button>
@@ -147,6 +147,7 @@ const Reviews = ({ code, reviews, handleAdd, handleUpdate, handleDelete }) => {
             code={code}
           />
         </Toggleable>
+        <hr/>
       </div>
     );
   } else
@@ -161,6 +162,7 @@ const Reviews = ({ code, reviews, handleAdd, handleUpdate, handleDelete }) => {
             toggle={reviewFormRef}
           />
         </Toggleable>
+        <hr/>
         <div>
           {verifiedReviews
             .sort((a, b) => b.likes - a.likes)

@@ -1,4 +1,5 @@
 import { useState, forwardRef, useImperativeHandle } from "react";
+import { BsPencil } from "react-icons/bs";
 import PropTypes from "prop-types";
 
 const Toggleable = forwardRef((props, refs) => {
@@ -19,11 +20,12 @@ const Toggleable = forwardRef((props, refs) => {
 
   return (
     <div>
-      <button onClick={toggleVisibility} style={hideIfTrue}>
-        {props.buttonLabel}
+      <button className="general-btn" onClick={toggleVisibility} style={hideIfTrue}>
+        <BsPencil />
+        {" " + props.buttonLabel}
       </button>
       <div style={showIfTrue}>{props.children}</div>
-      <button onClick={toggleVisibility} style={showIfTrue}>
+      <button className="general-btn" onClick={toggleVisibility} style={showIfTrue}>
         cancel
       </button>
     </div>

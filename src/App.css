@@ -58,6 +58,22 @@ body {
 }
 
 
+
+.post-btn {
+    border-radius: 30px;
+    border-width: 1px;
+    border-color: black;
+    
+    background-color: white;
+    padding: 5px 8px 5px 8px;
+    margin: 0px 5px 5px 5px;
+}
+
+.post-btn:hover {
+    background-color: #e1e1e1;
+}
+
+
 .reviews {
     grid-column-start: 2;
     grid-column-end: 3;
@@ -71,7 +87,7 @@ body {
     padding: 20px;
 }
 
-.like-dislike-btn {
+.general-btn {
     border-radius: 30px;
     border-width: 1px;
     border-color: black;
@@ -81,7 +97,7 @@ body {
     margin: 5px 5px 5px 5px;
 }
 
-.like-dislike-btn:hover {
+.general-btn:hover {
     background-color: #e1e1e1;
 }
 

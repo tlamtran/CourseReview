@@ -54,13 +54,14 @@ const ReviewForm = ({ handleAdd, code, toggle }) => {
         <TextArea areaType={"review"} text={text} setText={setText} />
         Student ID
         <input
+          className="student-id-input"
           placeholder="6-7 digits"
           value={studentID}
           type="number"
           onChange={({ target }) => setStudentID(target.value)}
         />
         <div>
-          <button type="submit">Post</button>
+          <button className="post-btn" type="submit">Post</button>
         </div>
       </div>
     </form>
