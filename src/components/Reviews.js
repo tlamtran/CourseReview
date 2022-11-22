@@ -1,7 +1,7 @@
 import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineDislike } from "react-icons/ai";
 import { useState, useRef, useEffect } from "react";
-import axios from 'axios'
+
 import StarReview from "./StarReview";
 import ReviewsStats from "./ReviewsStats";
 import ReviewForm from "./ReviewForm";
