@@ -16,6 +16,14 @@ const Filters = ({ setCourses, courses, filters, setFilters }) => {
           onChange={e => {
             setFilters([e.target.checked, e.target.checked, filters[2]]);
           }}
+          overrides={{
+            Checkmark: {
+              style: ({ $checked, $isIndeterminate }) => ({
+                outline: '#444444',
+                backgroundColor: ($checked || $isIndeterminate) ? '#444444' : null,
+              })
+            }
+          }}
           isIndeterminate={isIndeterminate}
         >
           Data Science major
@@ -26,6 +34,14 @@ const Filters = ({ setCourses, courses, filters, setFilters }) => {
             onChange={e => {
               setFilters([e.target.checked, filters[1], filters[2]]);
             }}
+            overrides={{
+              Checkmark: {
+                style: ({ $checked }) => ({
+                  outline: '#444444',
+                  backgroundColor: $checked ? '#444444' : null,
+                })
+              }
+            }}
           >
             Basic studies
           </Checkbox>
@@ -33,6 +49,14 @@ const Filters = ({ setCourses, courses, filters, setFilters }) => {
             checked={filters[1]}
             onChange={e => {
               setFilters([filters[0], e.target.checked, filters[2]]);
+            }}
+            overrides={{
+              Checkmark: {
+                style: ({ $checked }) => ({
+                  outline: '#444444',
+                  backgroundColor: $checked ? '#444444' : null,
+                })
+              }
             }}
           >
             Major studies
@@ -42,6 +66,14 @@ const Filters = ({ setCourses, courses, filters, setFilters }) => {
           checked={filters[2]}
           onChange={e => {
             setFilters([filters[0], filters[1], e.target.checked]);
+          }}
+          overrides={{
+            Checkmark: {
+              style: ({ $checked }) => ({
+                outline: '#444444',
+                backgroundColor: $checked ? '#444444' : null,
+              })
+            }
           }}
         >
           Minor studies

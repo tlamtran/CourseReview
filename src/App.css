@@ -47,6 +47,9 @@ hr {
     font-weight: bold;
     font-style: normal;
     text-transform: uppercase;
+    position: relative;
+    bottom: 19px;
+    left: 7px;
 }
 /* ---------- ---------- */
 
@@ -61,7 +64,6 @@ hr {
     grid-row-start: 2;
     grid-row-end: 3;
 }
-
 .courses {
     grid-column-start: 1;
     grid-column-end: 2;
@@ -168,6 +170,8 @@ hr {
     margin: 5px 10px 5px 5px;
 }
 /* ---------- ---------- */
+
+
 
 
 
