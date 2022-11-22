@@ -64,8 +64,13 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
         <div>
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Twitter_Verified_Badge.svg/768px-Twitter_Verified_Badge.svg.png"
-            width={20}
+            style={{ height: '20px' }}
           />
+        </div>
+      );
+    } else {
+      return (
+        <div style={{ height: '20px' }}>
         </div>
       );
     }
@@ -75,16 +80,23 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
     <div className="review">
       <div>
         <p style={{ fontSize: "0.75em" }}>{review.student_id} (hidden later)</p>
-        <Verified />
-        <p>{review.review}</p>
-        <div>
-          difficulty <StarReview starValue={review.difficulty} />
+        <div className="stars-and-verified">
+          <StarReview starValue={(review.difficulty + review.workload + review.teaching)/3} />
+          <Verified />
         </div>
-        <div>
-          workload <StarReview starValue={review.workload} />
-        </div>
-        <div>
-          teaching <StarReview starValue={review.teaching} />
+        <div className="review-text-stars">
+          <div className="review-text">{review.review}</div>
+          <div className="star-ratings">
+            <div>
+              difficulty <StarReview starValue={review.difficulty} />
+            </div>
+            <div>
+              workload <StarReview starValue={review.workload} />
+            </div>
+            <div>
+              teaching <StarReview starValue={review.teaching} />
+            </div>
+          </div>
         </div>
       </div>
       <div style={{ display: "flex", flexDirection: "row" }}>

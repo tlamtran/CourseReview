@@ -78,8 +78,6 @@ hr {
     font-size: 1.5em;
 }
 
-
-
 .post-btn {
     border-radius: 30px;
     border-width: 1px;
@@ -106,7 +104,14 @@ hr {
 }
 
 .review {
-    padding: 20px 0px 20px 0px;
+    padding: 0px 0px 40px 0px;
+}
+
+.stars-and-verified {
+    display: flex;
+    flex-direction: row;
+
+    padding: 0px 0px 10px 0px;
 }
 
 
@@ -115,6 +120,17 @@ hr {
     flex-direction: row;
 
     margin-bottom: 10px;
+}
+
+.review-text {
+    padding: 0px 0px 10px 0px;
+    min-height: 50px;
+    width: 265px;
+}
+
+.review-text-stars {
+    display: flex;
+    flex-direction: row;
 }
 
 
