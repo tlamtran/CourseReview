@@ -1,7 +1,7 @@
 import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineDislike } from "react-icons/ai";
 import { useState, useRef, useEffect } from "react";
-
+import axios from 'axios'
 import StarReview from "./StarReview";
 import ReviewsStats from "./ReviewsStats";
 import ReviewForm from "./ReviewForm";
@@ -113,6 +113,19 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
 
 const Reviews = ({ code, reviews, handleAdd, handleUpdate, handleDelete }) => {
   const reviewFormRef = useRef();
+  const [studentList, setStudents] = useState([]);
+  var verifiedReviews = [];
+  var nonVerifiedReviews = [];
+
+  useEffect(() => {
+    studentServices.getStudents().then((response) => setStudents(response));
+  }, []);
+
+  if (reviews!==null) {
+    verifiedReviews = reviews.filter(review => studentList.map(student => student.id).includes(review.student_id))
+    nonVerifiedReviews = reviews.filter(review => !studentList.map(student => student.id).includes(review.student_id))
+  }
+
 
   if (reviews === null) {
     return <p>select a course from the list</p>;
@@ -136,7 +149,14 @@ const Reviews = ({ code, reviews, handleAdd, handleUpdate, handleDelete }) => {
           <ReviewForm handleAdd={handleAdd} code={code} toggle={reviewFormRef} />
         </Toggleable>
         <div>
-          {reviews.map((review) => ( // should be sorted according to likes/dislikes
+          {verifiedReviews
+          .sort((a, b) => b.likes - a.likes)
+          .map((review) => (
+            <Review review={review} key={review.id} handleUpdate={handleUpdate} handleDelete={handleDelete} />
+          ))}
+          {nonVerifiedReviews
+          .sort((a, b) => b.likes - a.likes)
+          .map((review) => (
             <Review review={review} key={review.id} handleUpdate={handleUpdate} handleDelete={handleDelete} />
           ))}
         </div>
