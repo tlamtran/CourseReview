@@ -1,4 +1,4 @@
-import { AiOutlineLike } from "react-icons/ai";
+import { AiOutlineConsoleSql, AiOutlineLike } from "react-icons/ai";
 import { AiOutlineDislike } from "react-icons/ai";
 import { useState, useRef, useEffect } from "react";
 
@@ -8,6 +8,7 @@ import ReviewForm from "./ReviewForm";
 import EditForm from "./EditForm";
 import Toggleable from "./Toggleable";
 import studentServices from "../services/students";
+import courseServices from "../services/courses";
 
 const Review = ({ review, handleUpdate, handleDelete }) => {
   const [likes, setLikes] = useState(review.likes);
@@ -119,12 +120,24 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
 const Reviews = ({ code, reviews, handleAdd, handleUpdate, handleDelete }) => {
   const reviewFormRef = useRef();
   const [studentList, setStudents] = useState([]);
+  const [courses, setCourses] = useState();
+  var courseName = null;
   var verifiedReviews = [];
   var nonVerifiedReviews = [];
 
   useEffect(() => {
     studentServices.getStudents().then((response) => setStudents(response));
   }, []);
+
+  useEffect(() => {
+    courseServices.getCourses().then((response) => setCourses(response));
+  }, []);
+
+  if (courses !== undefined) {
+    const courseFound = courses.find(x => x.code === code);
+    if (courseFound !== undefined)
+      courseName = courseFound.name.en;
+  }
 
   if (reviews !== null) {
     verifiedReviews = reviews.filter(review => studentList.map(student => student.id).includes(review.student_id))
@@ -137,7 +150,7 @@ const Reviews = ({ code, reviews, handleAdd, handleUpdate, handleDelete }) => {
   } else if (reviews.length < 1) {
     return (
       <div className="reviews">
-        <h1>{code}</h1>
+        <h1 className="course-name">{code + " - " + courseName}</h1>
         <p>no reviews found</p>
         <ReviewsStats reviews={reviews} />
         <Toggleable buttonLabel="Write a review" ref={reviewFormRef}>
@@ -153,7 +166,7 @@ const Reviews = ({ code, reviews, handleAdd, handleUpdate, handleDelete }) => {
   } else
     return (
       <div className="reviews">
-        <h1>{code}</h1>
+        <h1 className="course-name">{code + " - " + courseName}</h1>
         <ReviewsStats reviews={reviews} />
         <Toggleable buttonLabel="Write a review" ref={reviewFormRef}>
           <ReviewForm
