@@ -10,7 +10,7 @@ const Filters = ({ setCourses, courses, filters, setFilters }) => {
   return (
     <div className="filters">
       <h2 style={{ paddingLeft: 10 }}>Courses</h2>
-      <div className="checkboxes" style={{ paddingLeft: 20 }}>
+      <div className="checkboxes" style={{ paddingLeft: 30 }}>
         <Checkbox
           checked={majorAllChecked}
           onChange={e => {
@@ -22,13 +22,18 @@ const Filters = ({ setCourses, courses, filters, setFilters }) => {
                 outline: '#444444',
                 backgroundColor: ($checked || $isIndeterminate) ? '#444444' : null,
               })
-            }
+            },
+            Label : {
+              style: {
+                fontFamily: "Inter",
+              },
+            },
           }}
           isIndeterminate={isIndeterminate}
         >
           Data Science major
         </Checkbox>
-        <div style={{ padding: 8, paddingLeft: 20 }}>
+        <div style={{ padding: 10, paddingLeft: 30 }}>
           <Checkbox
             checked={filters[0]}
             onChange={e => {
@@ -40,11 +45,17 @@ const Filters = ({ setCourses, courses, filters, setFilters }) => {
                   outline: '#444444',
                   backgroundColor: $checked ? '#444444' : null,
                 })
-              }
+              },
+              Label : {
+                style: {
+                  fontFamily: "Inter",
+                },
+              },
             }}
           >
             Basic studies
           </Checkbox>
+          <div style={{ paddingTop: 10 }}></div>
           <Checkbox
             checked={filters[1]}
             onChange={e => {
@@ -56,7 +67,12 @@ const Filters = ({ setCourses, courses, filters, setFilters }) => {
                   outline: '#444444',
                   backgroundColor: $checked ? '#444444' : null,
                 })
-              }
+              },
+              Label : {
+                style: {
+                  fontFamily: "Inter",
+                },
+              },
             }}
           >
             Major studies
@@ -73,7 +89,12 @@ const Filters = ({ setCourses, courses, filters, setFilters }) => {
                 outline: '#444444',
                 backgroundColor: $checked ? '#444444' : null,
               })
-            }
+            },
+            Label : {
+              style: {
+                fontFamily: "Inter",
+              },
+            },
           }}
         >
           Minor studies
