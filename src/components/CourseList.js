@@ -22,6 +22,7 @@ const CourseList = ({ courses, fetch, filterCourses }) => {
                 onChange={({ target }) => setSearch(target.value)}
                 placeholder="Search by course name"
             />
+            <hr></hr>
             <StatefulMenu
                 items={
                     filterCourses.length === 0

@@ -81,6 +81,14 @@ hr {
     grid-column-end: 2;
     grid-row-start: 3;
     grid-row-end: 4;
+    width: 100%;
+}
+
+.courses input {
+    border-radius: 30px;
+    border-color: black;
+    border-width: 1px;
+    padding: 5px 8px 5px 8px;
 }
 /* ---------- ---------- */
 
@@ -90,6 +98,7 @@ hr {
 /* ---------- REVIEWS STYLING ---------- */
 .course-name {
     font-size: 1.5em;
+    font-family: "Inter";
 }
 
 .post-btn {
@@ -117,6 +126,16 @@ hr {
     padding-left: 20px;
 }
 
+.courses hr {
+    width: 95%;
+    position: relative;
+    left: 2.5%
+}
+
+.reviewsstats {
+    font-family: "Inter";
+}
+
 .review {
     padding: 0px 0px 40px 0px;
 }
@@ -139,7 +158,7 @@ hr {
 .review-text {
     padding: 0px 0px 10px 0px;
     min-height: 75px;
-    width: 265px;
+    width: 75%;
     word-wrap: break-word;
     text-align: justify;
 }
@@ -147,6 +166,7 @@ hr {
 .review-text-stars {
     display: flex;
     flex-direction: row;
+    font-family: "Inter"
 }
 
 

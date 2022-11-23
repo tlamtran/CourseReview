@@ -95,13 +95,13 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
           <div className="review-text">{review.review}</div>
           <div className="star-ratings">
             <div>
-              difficulty <StarReview starValue={review.difficulty} />
+              <StarReview starValue={review.difficulty} /> Difficulty
             </div>
             <div>
-              workload <StarReview starValue={review.workload} />
+              <StarReview starValue={review.workload} /> Workload
             </div>
             <div>
-              teaching <StarReview starValue={review.teaching} />
+              <StarReview starValue={review.teaching} /> Teaching
             </div>
           </div>
         </div>
