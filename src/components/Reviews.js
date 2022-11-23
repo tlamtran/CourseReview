@@ -61,7 +61,8 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
 
   const handleRemove = async (event) => {
     event.preventDefault();
-    handleDelete(review.id);
+    if (window.confirm("Are you sure you want to delete this review?"))
+      handleDelete(review.id);
   };
 
   const Verified = () => {
