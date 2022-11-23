@@ -14,6 +14,9 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
   const [likes, setLikes] = useState(review.likes);
   const [dislikes, setDislikes] = useState(review.dislikes);
   const [newReviewText, setReview] = useState(review.review);
+  const [newDifficulty, setDifficulty] = useState(review.difficulty);
+  const [newWorkload, setWorkload] = useState(review.workload);
+  const [newTeaching, setTeaching] = useState(review.teaching);
   const [clicked, setClicked] = useState(false);
   const [studentID, setStudentID] = useState("");
   const [studentList, setStudents] = useState([]);
@@ -50,12 +53,16 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
     handleUpdate(review.id, {
       ...review,
       review: newReviewText,
+      difficulty: newDifficulty,
+      workload: newWorkload,
+      teaching: newTeaching,
     });
   };
 
   const handleRemove = async (event) => {
     event.preventDefault();
-    handleDelete(review.id);
+    if (window.confirm("Are you sure you want to delete this review?"))
+      handleDelete(review.id);
   };
 
   const Verified = () => {
@@ -120,6 +127,12 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
           handleEdit={handleEdit}
           handleRemove={handleRemove}
           setReview={setReview}
+          setDifficulty={setDifficulty}
+          setWorkload={setWorkload}
+          setTeaching={setTeaching}
+          newDifficulty={newDifficulty}
+          newWorkload={newWorkload}
+          newTeaching={newTeaching}
           text={newReviewText}
         />
       ) : null}

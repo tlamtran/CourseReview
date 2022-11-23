@@ -14,8 +14,9 @@ const ReviewForm = ({ handleAdd, code, toggle }) => {
     event.preventDefault();
     if (text.length === 0 || studentID.length === 0) {
       window.alert("Review text or student id missing.")
-    }
-    else {
+    } else if (studentID.length < 6 || studentID.length >7 ) {
+      window.alert("Student id must be 6-7 digits long.")
+    } else {
       const newReview = {
         student_id: Number(studentID),
         likes: 0,

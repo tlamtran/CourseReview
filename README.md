@@ -1,4 +1,6 @@
 # Course review website for DG/CS students
+https://coursereviewapp-production.up.railway.app/
+Note: Free host, thus slow responsiveness.
 
 npm required to manage JavaScript packages and dependencies
 https://docs.npmjs.com/downloading-and-installing-node-js-and-npm
