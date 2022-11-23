@@ -88,7 +88,7 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
       <div>
         <p style={{ fontSize: "0.75em" }}>{review.student_id} (hidden later)</p>
         <div className="stars-and-verified">
-          <StarReview starValue={(review.difficulty + review.workload + review.teaching)/3} />
+          <StarReview starValue={(review.difficulty + review.workload + review.teaching)/3} starSize={17} starstyle={{ marginRight: 1, cursor: "pointer" }} />
           <Verified />
         </div>
         <div className="review-text-stars">

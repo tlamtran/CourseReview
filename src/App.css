@@ -126,14 +126,14 @@ hr {
     padding-left: 20px;
 }
 
+.reviews hr {
+    width: 95%
+}
+
 .courses hr {
     width: 95%;
     position: relative;
     left: 2.5%
-}
-
-.reviewsstats {
-    font-family: "Inter";
 }
 
 .review {
@@ -191,6 +191,7 @@ hr {
 
 .write-review {
     text-align: center;
+    width: 72%
 }
 
 .student-id-input {

@@ -1,7 +1,7 @@
 import { FaStar } from "react-icons/fa";
 import { useState } from "react";
 
-const StarReview = ({ starValue, setStarValue }) => {
+const StarReview = ({ starValue, setStarValue, starSize, starstyle }) => {
   const stars = Array(1, 2, 3, 4, 5);
   const [hoverStars, setHoverStars] = useState(0);
 
@@ -22,11 +22,8 @@ const StarReview = ({ starValue, setStarValue }) => {
       <FaStar
         className={`star${value}`}
         key={value}
-        size={17}
-        style={{
-          marginRight: 1,
-          cursor: "pointer",
-        }}
+        size={starSize}
+        style={starstyle}
         color={(starValue || hoverStars) >= value ? "#FFBA5A" : "#a9a9a9"}
         onClick={() => handleClick(value)}
         onMouseOver={() => handleHover(value)}
