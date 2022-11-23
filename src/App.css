@@ -76,6 +76,10 @@ hr {
     font-family: "Inter";   
 }
 
+.search-div {
+    margin-left: 20px;
+}
+
 .courses {
     grid-column-start: 1;
     grid-column-end: 2;
@@ -109,6 +113,7 @@ hr {
     background-color: white;
     padding: 5px 8px 5px 8px;
     margin: 0px 5px 5px 0px;
+    cursor: pointer;
 }
 
 .post-btn:hover {
@@ -173,6 +178,7 @@ hr {
 .star-ratings {
     margin-left: 20px;
     margin-top: -3px;
+    cursor: pointer;
 }
 
 .general-btn {
@@ -183,6 +189,7 @@ hr {
     background-color: white;
     padding: 5px 8px 5px 8px;
     margin: 5px 10px 5px 0px;
+    cursor: pointer;
 }
 
 .general-btn:hover {

@@ -16,19 +16,21 @@ const CourseList = ({ courses, fetch, filterCourses }) => {
 
     return (
         <div className="courses">
-            <input
-                className="search"
-                value={search}
-                onChange={({ target }) => setSearch(target.value)}
-                placeholder="Search by course name"
-            />
+            <div className="search-div">
+                <input
+                    className="search"
+                    value={search}
+                    onChange={({ target }) => setSearch(target.value)}
+                    placeholder="Search by course name"
+                />
+            </div>
             <hr></hr>
             <StatefulMenu
                 items={
                     filterCourses.length === 0
                         ? courses
                             .filter((course) =>
-                                course.name.en.toLowerCase().includes(search)
+                                course.name.en.toLowerCase().includes(search.toLowerCase())
                             )
                             .slice(0, 30)
                         : filterCourses
@@ -43,6 +45,7 @@ const CourseList = ({ courses, fetch, filterCourses }) => {
                             gridRowStart: 3,
                             gridRowEnd: 4,
                             maxHeight: "40vh",
+                            minHeight: "40vh",
                             padding: "0px",
                             borderRadius: "0px",
                             paddingLeft: "10px",
