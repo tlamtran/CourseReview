@@ -81,7 +81,7 @@ const ReviewsStats = ({ reviews }) => {
         </div>
       </div>  
       <div className="overall-score">
-        <h1>{Math.round(score * 10) / 10}</h1> 
+        <h1>{(Math.round(score * 10) / 10).toPrecision(2)}</h1> 
         <StarReview starValue={(Math.round(score * 10)/10)} starSize={30} starstyle={{ position: 'relative', left: '-12%', bottom: 70 }}/>
       </div>
     </div> 
