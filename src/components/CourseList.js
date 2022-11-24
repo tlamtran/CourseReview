@@ -5,7 +5,7 @@ import React, { useState } from "react";
 
 const Course = React.forwardRef((props, ref) => {
     let conditionalBg = "credits in-elec";
-    
+
     if (props.item.inDS) {
         conditionalBg = "credits in-major-basic";
     } else if (props.item.inMinor) {
@@ -14,25 +14,26 @@ const Course = React.forwardRef((props, ref) => {
         conditionalBg = "credits in-elec";
     }
 
-    return(
-    <MenuAdapter {...props} ref={ref} endEnhancer={() => <ChevronRight />}>
-        {/* <ListItemLabel> */}
-        <div className="course-name-credits">
-            <div className={conditionalBg}>
-                <div className="credit-amount">
-                    { props.item.credits.min === props.item.credits.max ? `${props.item.credits.min}` : `${props.item.credits.min} - ${props.item.credits.max}` }
+    return (
+        <MenuAdapter {...props} ref={ref} endEnhancer={() => <ChevronRight />}>
+            {/* <ListItemLabel> */}
+            <div className="course-name-credits">
+                <div className={conditionalBg}>
+                    <div className="credit-amount">
+                        {props.item.credits.min === props.item.credits.max ? `${props.item.credits.min}` : `${props.item.credits.min} - ${props.item.credits.max}`}
+                    </div>
+                    <div>
+                        cr
+                    </div>
                 </div>
-                <div>
-                    cr
+                <div className="course-name">
+                    {props.item.code} - {props.item.name.en}
                 </div>
             </div>
-            <div className="course-name">
-                {props.item.code} - {props.item.name.en}
-            </div>
-        </div>
-        {/* </ListItemLabel> */}
-    </MenuAdapter>
-)});
+            {/* </ListItemLabel> */}
+        </MenuAdapter>
+    )
+});
 
 const CourseList = ({ courses, fetch }) => {
     const [search, setSearch] = useState("");
@@ -44,7 +45,7 @@ const CourseList = ({ courses, fetch }) => {
                     className="search"
                     value={search}
                     onChange={({ target }) => setSearch(target.value)}
-                    placeholder="Search by course name"
+                    placeholder="Search by code/name"
                 />
             </div>
             <hr></hr>
@@ -53,6 +54,7 @@ const CourseList = ({ courses, fetch }) => {
                     courses
                         .filter((course) =>
                             course.name.en.toLowerCase().includes(search.toLowerCase())
+                            || course.code.toLowerCase().includes(search.toLowerCase())
                         )
                         .slice(0, 30)
                 }
