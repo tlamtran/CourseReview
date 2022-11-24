@@ -11,7 +11,7 @@ const Course = React.forwardRef((props, ref) => (
     </MenuAdapter>
 ));
 
-const CourseList = ({ courses, fetch, filterCourses }) => {
+const CourseList = ({ courses, fetch }) => {
     const [search, setSearch] = useState("");
 
     return (
@@ -27,13 +27,11 @@ const CourseList = ({ courses, fetch, filterCourses }) => {
             <hr></hr>
             <StatefulMenu
                 items={
-                    filterCourses.length === 0
-                        ? courses
-                            .filter((course) =>
-                                course.name.en.toLowerCase().includes(search.toLowerCase())
-                            )
-                            .slice(0, 30)
-                        : filterCourses
+                    courses
+                        .filter((course) =>
+                            course.name.en.toLowerCase().includes(search.toLowerCase())
+                        )
+                        .slice(0, 30)
                 }
                 onItemSelect={(item) => fetch(item.item.code)}
                 overrides={{

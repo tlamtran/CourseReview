@@ -86,9 +86,8 @@ const Review = ({ review, handleUpdate, handleDelete }) => {
   return (
     <div className="review">
       <div>
-        <p style={{ fontSize: "0.75em" }}>{review.student_id} (hidden later)</p>
         <div className="stars-and-verified">
-          <StarReview starValue={(review.difficulty + review.workload + review.teaching)/3} starSize={17} starstyle={{ marginRight: 1, cursor: "pointer" }} />
+          <StarReview starValue={(review.difficulty + review.workload + review.teaching) / 3} starSize={17} starstyle={{ marginRight: 1, cursor: "pointer" }} />
           <Verified />
         </div>
         <div className="review-text-stars">
@@ -185,7 +184,7 @@ const Reviews = ({ code, reviews, handleAdd, handleUpdate, handleDelete }) => {
             code={code}
           />
         </Toggleable>
-        <hr/>
+        <hr />
       </div>
     );
   } else
@@ -200,7 +199,7 @@ const Reviews = ({ code, reviews, handleAdd, handleUpdate, handleDelete }) => {
             toggle={reviewFormRef}
           />
         </Toggleable>
-        <hr/>
+        <hr />
         <div>
           {verifiedReviews
             .sort((a, b) => b.likes - a.likes)

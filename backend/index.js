@@ -1,13 +1,13 @@
 const express = require("express");
 const cors = require("cors");
 const client = require("./db");
-//const pg = require('pg');
 
 const app = express();
 
 // middleware
 app.use(cors());
 app.use(express.json()); //req.body
+app.use(express.static('build'))
 
 // CONNECT TO POSTGRESQL DATABASE
 client.connect(function (err) {
@@ -112,8 +112,7 @@ app.delete("/reviews/:id", (req, res) => {
   );
 });
 
-
-
+// GET VERIFIED USERS
 app.get("/verified", (req, res) => {
   client.query("SELECT * FROM verified_ids", (err, result) => {
     if (!err) {
@@ -128,9 +127,7 @@ app.get("/verified", (req, res) => {
 });
 
 
-
-
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`server has started on port ${PORT}`);
 });

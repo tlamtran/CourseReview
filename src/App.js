@@ -30,11 +30,6 @@ const App = () => {
     const basic = filters[0] ? courseServices.getBasic() : []
     const major = filters[1] ? courseServices.getMajor() : []
     const minor = filters[2] ? courseServices.getMinor() : []
-    const toDisplay = [].concat(basic, major, minor)
-    console.log(filters)
-    console.log(basic)
-    console.log(major)
-    console.log(minor)
     setFilterCourses([].concat(basic, major, minor))
   }, [filters])
 
@@ -76,9 +71,8 @@ const App = () => {
             filters={filters}
             setFilters={setFilters} />
           <CourseList
-            courses={courses}
-            fetch={fetchCourseReviews}
-            filterCourses={filterCourses} />
+            courses={filters.some(Boolean) ? filterCourses : courses}
+            fetch={fetchCourseReviews} />
           <Reviews
             code={code}
             reviews={reviews}
