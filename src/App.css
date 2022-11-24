@@ -88,6 +88,35 @@ hr {
     width: 100%;
 }
 
+.course-name-credits {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.credits {
+    display: flex;
+    flex-direction: column;
+    min-width: 40px;
+    align-items: center;
+    padding: 5px;
+    margin-right: 10px;
+    font-size: 15px;
+}
+
+
+.in-major-basic {
+    background-color: #D7B98E;
+}
+
+.in-elec {
+    background-color: #F1A7BA;
+}
+
+.in-minor {
+    background-color: #8CCCB3;
+}
+
 .courses input {
     border-radius: 30px;
     border-color: black;
@@ -234,7 +263,6 @@ hr {
 
 .write-review {
     text-align: center;
-    width: 72%
 }
 
 .student-id-input {

@@ -3,13 +3,36 @@ import { StatefulMenu } from "baseui/menu";
 import { ListItemLabel, MenuAdapter } from "baseui/list";
 import React, { useState } from "react";
 
-const Course = React.forwardRef((props, ref) => (
+const Course = React.forwardRef((props, ref) => {
+    let conditionalBg = "credits in-elec";
+    
+    if (props.item.inDS) {
+        conditionalBg = "credits in-major-basic";
+    } else if (props.item.inMinor) {
+        conditionalBg = "credits in-minor";
+    } else {
+        conditionalBg = "credits in-elec";
+    }
+
+    return(
     <MenuAdapter {...props} ref={ref} endEnhancer={() => <ChevronRight />}>
-        <ListItemLabel>
-            {props.item.code} - {props.item.name.en}
-        </ListItemLabel>
+        {/* <ListItemLabel> */}
+        <div className="course-name-credits">
+            <div className={conditionalBg}>
+                <div className="credit-amount">
+                    { props.item.credits.min === props.item.credits.max ? `${props.item.credits.min}` : `${props.item.credits.min} - ${props.item.credits.max}` }
+                </div>
+                <div>
+                    cr
+                </div>
+            </div>
+            <div className="course-name">
+                {props.item.code} - {props.item.name.en}
+            </div>
+        </div>
+        {/* </ListItemLabel> */}
     </MenuAdapter>
-));
+)});
 
 const CourseList = ({ courses, fetch }) => {
     const [search, setSearch] = useState("");
