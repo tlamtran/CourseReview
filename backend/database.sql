@@ -5,16 +5,10 @@ CREATE TABLE reviews(
 	likes INT,
 	dislikes INT,
   course_id VARCHAR(255),
-	difficuly INT,
+	difficulty INT,
 	workload INT,
 	teaching INT,
   	PRIMARY KEY(id)
-);
-
-CREATE TABLE students(
-	student_id INT,
-	name VARCHAR(255),
-  	PRIMARY KEY(student_id)
 );
 
 
