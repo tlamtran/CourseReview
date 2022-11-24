@@ -44,16 +44,16 @@ const ReviewForm = ({ handleAdd, code, toggle }) => {
           <TextArea areaType={"review"} text={text} setText={setText} />
           <div className="star-ratings">
             <div>
-              difficulty {difficulty}
-              <StarReview starValue={difficulty} setStarValue={setDifficulty} />
+              <StarReview starValue={difficulty} setStarValue={setDifficulty} starstyle={{ marginRight: 5 }}/>
+              Difficulty
             </div>
             <div>
-              workload {workLoad}
-              <StarReview starValue={workLoad} setStarValue={setWorkload} />
+              <StarReview starValue={workLoad} setStarValue={setWorkload} starstyle={{ marginRight: 5 }}/>
+              Workload 
             </div>
             <div>
-              teaching {teaching}
-              <StarReview starValue={teaching} setStarValue={setTeaching} />
+              <StarReview starValue={teaching} setStarValue={setTeaching} starstyle={{ marginRight: 5 }}/>
+              Teaching 
             </div>
           </div>
         </div>
