@@ -9,31 +9,78 @@ const ReviewsStats = ({ reviews }) => {
     (3 * reviews.length);
 
   return (
-    <div className="reviews-stats"> 
-      <div>
-        Difficulty <ProgressBar
-          value = {((reviews.map((r) => r.difficulty).reduce((x, y) => x+y, 0))/reviews.length)*20}
-          overrides={{
-            BarProgress: {
-              style: {
-                backgroundColor: '#DCB757',
+    <div className="reviews-stats">
+      <div className="bars">
+        <div className="stats-difficulty">
+          Difficulty <ProgressBar
+            value = {((reviews.map((r) => r.difficulty).reduce((x, y) => x+y, 0))/reviews.length)*20}
+            overrides={{
+              BarProgress: {
+                style: {
+                  backgroundColor: '#DCB757',
+                }
+              },
+              BarContainer : {
+                style: {
+                  backgroundColor: '#D9D9D9',
+                  outline: '#FFFFFF',
+                  width: '40%',
+                  position: 'relative',
+                  bottom: '20%',
+                  left: '0.7%'
+                }
               }
-            },
-            BarContainer : {
-              style: {
-                backgroundColor: '#D9D9D9',
-                outline: '#FFFFFF',
-                width: '40%',
-                position: 'relative',
-                top: '10%',
-                left: '10%'
+            }}
+          /> 
+        </div>
+        <div className="stats-teaching">
+          Teaching  <ProgressBar
+            value = {((reviews.map((r) => r.teaching).reduce((x, y) => x+y, 0))/reviews.length)*20}
+            overrides={{
+              BarProgress: {
+                style: {
+                  backgroundColor: '#DCB757',
+                }
+              },
+              BarContainer : {
+                style: {
+                  backgroundColor: '#D9D9D9',
+                  outline: '#FFFFFF',
+                  width: '40%',
+                  position: 'relative',
+                  bottom: '20%',
+                  left: '0.4%'
+                }
               }
-            }
-          }}
-        />
-      </div> 
-      <h1 style={{ fontFamily: "Inter", position: 'relative', left: '65%', fontSize: '75px' }}>{Math.round(score * 10) / 10}</h1>
-      <StarReview starValue={(Math.round(score * 10)/10)} starSize={30} starstyle={{ position: 'relative', left: '62.5%', bottom: 40 }}/>
+            }}
+          /> 
+        </div>
+        <div className="stats-workload">
+          Workload <ProgressBar
+            value = {((reviews.map((r) => r.workload).reduce((x, y) => x+y, 0))/reviews.length)*20}
+            overrides={{
+              BarProgress: {
+                style: {
+                  backgroundColor: '#DCB757',
+                }
+              },
+              BarContainer : {
+                style: {
+                  backgroundColor: '#D9D9D9',
+                  outline: '#FFFFFF',
+                  width: '40%',
+                  position: 'relative',
+                  bottom: '20%'
+                }
+              }
+            }}
+          /> 
+        </div>
+        <div className="overall-score">
+          <h1>{Math.round(score * 10) / 10}</h1> 
+          <StarReview starValue={(Math.round(score * 10)/10)} starSize={30} starstyle={{ position: 'relative', left: '-12%', bottom: 70 }}/>
+        </div>
+      </div>  
     </div> 
   );
 };

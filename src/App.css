@@ -105,6 +105,30 @@ hr {
     font-family: "Inter";
 }
 
+.stats-difficulty {
+    display: flex;
+    padding-top: 1%;
+}
+
+.stats-teaching {
+    display: flex;
+    padding-top: 1%;
+}
+
+.stats-workload {
+    display: flex;
+    padding-top: 1%;
+}
+
+.overall-score {
+    font-family: "Inter";
+    font-size: 40px;
+    position: absolute;
+    right: 13%;
+    top: 8%
+}
+
+
 .post-btn {
     border-radius: 30px;
     border-width: 1px;

@@ -175,8 +175,7 @@ const Reviews = ({ code, reviews, handleAdd, handleUpdate, handleDelete }) => {
     return (
       <div className="reviews">
         <h1 className="course-name">{code + " - " + courseName}</h1>
-        <p>no reviews found</p>
-        <ReviewsStats reviews={reviews} />
+        <p>No reviews found</p>
         <Toggleable buttonLabel="Write a review" ref={reviewFormRef}>
           <ReviewForm
             handleAdd={handleAdd}
