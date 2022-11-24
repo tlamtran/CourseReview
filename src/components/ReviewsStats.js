@@ -1,5 +1,5 @@
 import StarReview from "./StarReview"
-import { ProgressBar } from "baseui/progress-bar";
+import { ProgressBar, SIZE } from "baseui/progress-bar";
 
 const ReviewsStats = ({ reviews }) => {
   const score =
@@ -24,13 +24,14 @@ const ReviewsStats = ({ reviews }) => {
                 style: {
                   backgroundColor: '#D9D9D9',
                   outline: '#FFFFFF',
-                  width: '40%',
+                  width: '80%',
                   position: 'relative',
                   bottom: '20%',
                   left: '0.7%'
                 }
               }
             }}
+            size={SIZE.large}
           /> 
         </div>
         <div className="stats-teaching">
@@ -46,13 +47,14 @@ const ReviewsStats = ({ reviews }) => {
                 style: {
                   backgroundColor: '#D9D9D9',
                   outline: '#FFFFFF',
-                  width: '40%',
+                  width: '80%',
                   position: 'relative',
                   bottom: '20%',
                   left: '0.4%'
                 }
               }
             }}
+            size={SIZE.large}
           /> 
         </div>
         <div className="stats-workload">
@@ -68,19 +70,20 @@ const ReviewsStats = ({ reviews }) => {
                 style: {
                   backgroundColor: '#D9D9D9',
                   outline: '#FFFFFF',
-                  width: '40%',
+                  width: '80%',
                   position: 'relative',
                   bottom: '20%'
                 }
               }
             }}
+            size={SIZE.large}
           /> 
         </div>
-        <div className="overall-score">
-          <h1>{Math.round(score * 10) / 10}</h1> 
-          <StarReview starValue={(Math.round(score * 10)/10)} starSize={30} starstyle={{ position: 'relative', left: '-12%', bottom: 70 }}/>
-        </div>
       </div>  
+      <div className="overall-score">
+        <h1>{Math.round(score * 10) / 10}</h1> 
+        <StarReview starValue={(Math.round(score * 10)/10)} starSize={30} starstyle={{ position: 'relative', left: '-12%', bottom: 70 }}/>
+      </div>
     </div> 
   );
 };

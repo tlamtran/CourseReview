@@ -120,12 +120,24 @@ hr {
     padding-top: 1%;
 }
 
+
+.reviews-stats {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    min-height: 150px;
+    max-height: 200px;
+}
+
+.bars {
+    min-width: 70%;
+}
+
 .overall-score {
     font-family: "Inter";
     font-size: 40px;
-    position: absolute;
     right: 13%;
-    top: 8%
+    top: 8%;
 }
 
 
