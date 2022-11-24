@@ -17,7 +17,7 @@ const ReviewsStats = ({ reviews }) => {
             overrides={{
               BarProgress: {
                 style: {
-                  backgroundColor: '#DCB757',
+                  backgroundColor: '#FFBA5A',
                 }
               },
               BarContainer : {
@@ -40,7 +40,7 @@ const ReviewsStats = ({ reviews }) => {
             overrides={{
               BarProgress: {
                 style: {
-                  backgroundColor: '#DCB757',
+                  backgroundColor: '#FFBA5A',
                 }
               },
               BarContainer : {
@@ -63,7 +63,7 @@ const ReviewsStats = ({ reviews }) => {
             overrides={{
               BarProgress: {
                 style: {
-                  backgroundColor: '#DCB757',
+                  backgroundColor: '#FFBA5A',
                 }
               },
               BarContainer : {
