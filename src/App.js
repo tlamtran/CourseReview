@@ -17,7 +17,7 @@ import Filters from "./components/Filters";
 
 const App = () => {
   const [courses, setCourses] = useState([]);
-  const [code, setCode] = useState(null);
+  const [course, setCourse] = useState(null);
   const [reviews, setReviews] = useState(null);
   const [filters, setFilters] = useState([false, false, false])
   const [filterCourses, setFilterCourses] = useState([])
@@ -33,10 +33,10 @@ const App = () => {
     setFilterCourses([].concat(basic, major, minor))
   }, [filters])
 
-  const fetchCourseReviews = async (code) => {
-    const response = await reviewServices.getReview(code);
+  const fetchCourseReviews = async (course) => {
+    const response = await reviewServices.getReview(course.code);
     setReviews(response);
-    setCode(code);
+    setCourse(course)
   };
 
   const handleAdd = async (newReview) => {
@@ -74,7 +74,7 @@ const App = () => {
             courses={filters.some(Boolean) ? filterCourses : courses}
             fetch={fetchCourseReviews} />
           <Reviews
-            code={code}
+            course={course}
             reviews={reviews}
             handleAdd={handleAdd}
             handleUpdate={handleUpdate}

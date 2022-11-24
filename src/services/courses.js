@@ -34,7 +34,9 @@ const basic = [
 ]
 
 const minors = [
-  { name: { en: "Computer Science (Master level)" }, code: "SCI3068" }
+  { name: { en: "Computer Science (Master level)" }, code: "SCI3068" },
+  { name: { en: "Control, Robotics and Autonomous Systems" }, code: "ELEC3028" },
+  { name: { en: "Security and Cloud Computing" }, code: "SCI3085" }
 ]
 
 

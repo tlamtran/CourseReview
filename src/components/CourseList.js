@@ -33,7 +33,7 @@ const CourseList = ({ courses, fetch }) => {
                         )
                         .slice(0, 30)
                 }
-                onItemSelect={(item) => fetch(item.item.code)}
+                onItemSelect={(item) => fetch(item.item)}
                 overrides={{
                     List: {
                         style: {
