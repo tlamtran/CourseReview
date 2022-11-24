@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3001/reviews'
+const baseUrl = '/reviews'
 
 const getReview = async (code) => {
   const response = await axios.get(`${baseUrl}/${code}`)

@@ -1,7 +1,5 @@
 import axios from "axios";
-
-const baseUrl = "http://localhost:3001/verified";
-
+const baseUrl = "/verified";
 
 const getStudents = async () => {
   const response = await axios.get(`${baseUrl}`);
